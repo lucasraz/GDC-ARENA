@@ -1,0 +1,147 @@
+:root {
+  /* Material 3 Tonal Palette for Stitch GDC-ARENA */
+  --background: #131313;
+  --on-background: #E5E2E1;
+  --primary: #FFB4A9;
+  --primary-container: #E20E0E;
+  --on-primary-container: #FFF5F3;
+  --surface: #131313;
+  --surface-container-low: #1C1C1B; /* 2-bit lift from base surface */
+  --surface-container-high: #2A2A2A;
+  --surface-container-highest: #353534;
+  --on-surface: #E5E2E1;
+  --outline-variant: rgba(94, 63, 58, 0.15); /* Proxy for ghost border */
+  --glass-bg: rgba(53, 53, 52, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-newsreader), serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Base Headings - Epilogue Authority */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-epilogue), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Narrative Body - Newsreader literary grace */
+p, li {
+  font-family: var(--font-newsreader), serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* Functional Labels - Inter precision */
+.label, .caption, span {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+}
+
+/* NO-LINE RULE: Using background shifts instead of borders */
+.section-container {
+  background: var(--surface);
+  padding: 4rem 1.5rem;
+}
+
+.card {
+  background: var(--surface-container-low);
+  border-radius: 4px; /* Stitch ROUND_FOUR */
+  padding: 2rem;
+  transition: background 0.3s ease;
+}
+
+.card:hover {
+  background: var(--surface-container-high);
+}
+
+.glass-nav {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+}
+
+.btn-primary {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* INPUT DESIGN SYSTEM: Better distinction */
+.input-field {
+  background: var(--surface-container-high);
+  border: 1px solid rgba(255,255,255,0.05); /* Subtle distinction */
+  border-radius: 4px;
+  color: var(--on-surface);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.input-field:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+  background: var(--surface-container-highest);
+}
+
+.input-label {
+  display: block;
+  font-family: var(--font-epilogue), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* Gallery Effects */
+.gallery-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-image-container img {
+  transition: transform 0.5s ease !important;
+}
+
+.gallery-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Glassmorphism for floating cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  border-radius: 8px;
+  padding: 2rem;
+}

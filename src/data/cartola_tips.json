@@ -1,0 +1,58 @@
+{
+  "rodada": 9,
+  "sources": [
+    {
+      "name": "Jornal da Paraíba",
+      "strategy": "Equilíbrio e Pontuação",
+      "squad": [
+        {"pos": "GOL", "name": "Raul", "club": "BOT", "price": 4.81},
+        {"pos": "LAT", "name": "Luciano Juba", "club": "BAH", "price": 9.41},
+        {"pos": "LAT", "name": "Ramon", "club": "VIT", "price": 8.58},
+        {"pos": "ZAG", "name": "Jemmes", "club": "FLU", "price": 7.25},
+        {"pos": "ZAG", "name": "Ruan", "club": "CAM", "price": 5.13},
+        {"pos": "MEI", "name": "Andreas Pereira", "club": "PAL", "price": 14.52, "cap": true},
+        {"pos": "MEI", "name": "Alan Patrick", "club": "INT", "price": 9.27},
+        {"pos": "MEI", "name": "Jean Lucas", "club": "BAH", "price": 10.04},
+        {"pos": "ATA", "name": "Calleri", "club": "SAO", "price": 12.37},
+        {"pos": "ATA", "name": "Gabriel", "club": "SAN", "price": 9.14},
+        {"pos": "ATA", "name": "Luiz Araújo", "club": "FLA", "price": 11.57}
+      ]
+    },
+    {
+      "name": "Seleção FC Brasil",
+      "strategy": "Confiança Máxima",
+      "highlights": [
+        "Foco no setor defensivo do Internacional",
+        "Aposta em Neymar (C$ 19) como diferencial técnico",
+        "Bernabéi (INT) como pilar lateral (C$ 11)"
+      ]
+    },
+    {
+      "name": "Tio Patinhas",
+      "strategy": "Valorização de Patrimônio",
+      "highlights": [
+        "Walter (MIR) - C$ 5",
+        "Luciano Juba (BAH) - C$ 5",
+        "Jemmes (FLU) - C$ 6"
+      ]
+    }
+  ],
+  "consolidated": {
+    "title": "Comando de Elite - GDC Arena",
+    "description": "O time definitivo mesclando as melhores probabilidades de scout e custo-benefício.",
+    "squad": [
+      {"pos": "GOL", "name": "Raul", "club": "BOT", "price": 4.81},
+      {"pos": "LAT", "name": "Bernabéi", "club": "INT", "price": 11.0},
+      {"pos": "LAT", "name": "Luciano Juba", "club": "BAH", "price": 9.41},
+      {"pos": "ZAG", "name": "Jemmes", "club": "FLU", "price": 7.25},
+      {"pos": "ZAG", "name": "Barboza", "club": "BOT", "price": 11.0},
+      {"pos": "MEI", "name": "Andreas Pereira", "club": "PAL", "price": 14.52, "cap": true},
+      {"pos": "MEI", "name": "Alan Patrick", "club": "INT", "price": 9.27},
+      {"pos": "MEI", "name": "Neymar", "club": "SAN", "price": 19.0},
+      {"pos": "ATA", "name": "Calleri", "club": "SAO", "price": 12.37},
+      {"pos": "ATA", "name": "Luiz Araújo", "club": "FLA", "price": 11.57},
+      {"pos": "ATA", "name": "Gabriel", "club": "SAN", "price": 9.14}
+    ],
+    "total_cost": 120.34
+  }
+}
