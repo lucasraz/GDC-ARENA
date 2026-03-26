@@ -13,7 +13,8 @@ import {
   AlertCircle,
   Share2,
   ChevronDown,
-  MessageCircle
+  MessageCircle,
+  DollarSign
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { joinEvent, leaveEvent, deleteEvent, saveEvent, togglePaymentStatus } from '@/app/actions/event_actions'
@@ -236,6 +237,9 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem' }}>
                                     <MessageCircle size={14} /> <span>{event.comments?.length || 0}</span>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 900, color: 'var(--primary)' }}>
+                                    <DollarSign size={14} /> <span>R$ {event.price.toFixed(2)}</span>
                                 </div>
                             </div>
                          </div>
