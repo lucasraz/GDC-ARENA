@@ -37,8 +37,6 @@ export default async function Header() {
             target="_blank" 
             rel="noopener noreferrer"
             style={{ opacity: 0.8, display: 'flex', alignItems: 'center', transition: 'opacity 0.2s', background: 'white', padding: '4px', borderRadius: '4px' }}
-            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}
           >
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
@@ -46,6 +44,7 @@ export default async function Header() {
               style={{ width: '18px', height: '18px' }}
             />
           </a>
+
         </div>
 
         
