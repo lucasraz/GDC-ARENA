@@ -36,13 +36,14 @@ export default async function Header() {
             href="https://www.instagram.com/gigantesdacervaa?igsh=MWJ6Njg2YnRrMGFjdA==" 
             target="_blank" 
             rel="noopener noreferrer"
-            style={{ opacity: 0.8, display: 'flex', alignItems: 'center', transition: 'opacity 0.2s', background: 'white', padding: '4px', borderRadius: '4px' }}
+            style={{ opacity: 0.8, display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'opacity 0.2s', textDecoration: 'none', color: 'inherit' }}
           >
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
               alt="Instagram" 
-              style={{ width: '18px', height: '18px' }}
+              style={{ width: '22px', height: '22px' }}
             />
+            <span className="label" style={{ fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.05em' }}>INSTAGRAM</span>
           </a>
 
         </div>
