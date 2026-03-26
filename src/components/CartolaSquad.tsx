@@ -66,11 +66,6 @@ export default function CartolaSquad({ name, strategy, squad, highlights }: Squa
         </ul>
       )}
 
-      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--surface-container-highest)' }}>
-          <button className="label" style={{ background: 'transparent', border: 'none', color: 'var(--on-surface)', cursor: 'pointer', opacity: 0.6, fontSize: '0.8rem', textTransform: 'uppercase' }}>
-            Ver Análise Completa →
-          </button>
-      </div>
     </div>
   )
 }
