@@ -246,11 +246,12 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                             fontSize: '0.75rem', 
                                                             fontWeight: 900, 
                                                             cursor: 'pointer',
-                                                            minWidth: '100px'
+                                                            minWidth: '80px'
                                                         }}
                                                     >
-                                                        {isAllPaid ? 'PAGO ✓' : 'DAR PAGO'}
+                                                        {isAllPaid ? 'PAGO ✓' : 'PAGO'}
                                                     </button>
+
 
                                                     {!isAllPaid && (
                                                         <button 
