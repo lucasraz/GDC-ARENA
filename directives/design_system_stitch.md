@@ -28,3 +28,4 @@ Stitch Project: GDC - ARENA (8357535006675303809)
 3.  **Glassmorphism:** Use `surface-variant` at 70% opacity with `24px` backdrop blur for floating navigation.
 4.  **Rhythm:** Strict 4px baseline grid.
 5.  **Watermarks:** Maltese Cross as a low-contrast background element.
+

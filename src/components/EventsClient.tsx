@@ -58,14 +58,37 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
   }
 
   const sendReminder = (event: any, hostProfile: any, amount: number) => {
-      const phone = hostProfile?.phone
+      // Handle both object and array response from Supabase
+      const profileData = Array.isArray(hostProfile) ? hostProfile[0] : hostProfile
+      const phone = profileData?.phone
+      
       if (!phone) {
-          alert('Este usuário não possui telefone cadastrado no perfil.')
+          alert(`Telefone não encontrado para ${profileData?.full_name || 'este usuário'}. Verifique se ele preencheu o campo no perfil.`)
           return
       }
-      const msg = `Olá ${hostProfile.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
+      const msg = `Olá ${profileData.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
       window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank')
   }
+
+  const handleDeleteEvent = async (id: string) => {
+    setIsDeleting(id)
+    const result = await deleteEvent(id, userId)
+    if (result.success) {
+      router.refresh()
+    }
+    setIsDeleting(null)
+  }
+
+  const handleSaveEvent = async (data: any) => {
+    const result = await saveEvent(userId, tenantId, data)
+    if (result.success) {
+      router.refresh()
+      setIsAdding(false)
+      return { success: true }
+    }
+    return result
+  }
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
@@ -89,6 +112,26 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
            {isAdding ? 'FECHAR FORMULÁRIO' : 'ORGANIZAR EVENTO'}
          </button>
       )}
+
+      <AnimatePresence mode="wait">
+        {isAdding && (
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="glass-card"
+                style={{ padding: '3rem' }}
+            >
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900 }}>NOVO EVENTO GDC</h3>
+                    <button onClick={() => setIsAdding(false)} style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer' }}>
+                        <X size={24} />
+                    </button>
+                </div>
+                <EventEditor onSubmit={handleSaveEvent} onCancel={() => setIsAdding(false)} />
+            </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Grid of Events */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
@@ -126,9 +169,22 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
               return (
                 <motion.div layout key={event.id} className="card" style={{ padding: '3rem', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 350px', gap: '4rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                             <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem' }}>GIGANTE ARENA</span>
-                             {userId === event.author_id && <Trash2 size={20} onClick={() => deleteEvent(event.id, userId)} style={{ color: '#E57373', cursor: 'pointer' }} />}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem' }}>GIGANTE ARENA</span>
+                                {(event.attendees?.filter((r: any) => !r.is_paid).reduce((sum: number, r: any) => {
+                                    const bp = availableBeers.find(b => b.id === r.selected_beer)?.price || 0
+                                    return sum + event.price + bp
+                                }, 0) > 0) && (
+                                    <span style={{ fontSize: '0.75rem', fontWeight: 900, color: '#E57373', background: 'rgba(229, 115, 115, 0.1)', padding: '0.2rem 0.6rem', borderRadius: '4px', border: '1px solid rgba(229, 115, 115, 0.2)' }}>
+                                        TOTAL PENDENTE: R$ {event.attendees?.filter((r: any) => !r.is_paid).reduce((sum: number, r: any) => {
+                                            const bp = availableBeers.find(b => b.id === r.selected_beer)?.price || 0
+                                            return sum + event.price + bp
+                                        }, 0).toFixed(2)}
+                                    </span>
+                                )}
+                             </div>
+                             {userId === event.author_id && <Trash2 size={20} onClick={() => handleDeleteEvent(event.id)} style={{ color: isDeleting === event.id ? 'var(--outline-variant)' : '#E57373', cursor: 'pointer' }} />}
                         </div>
                         <div>
                             <h3 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>{event.title}</h3>
@@ -138,6 +194,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                             <div style={{ display: 'flex', gap: '0.5rem' }}><MapPin size={18} /> {event.location}</div>
                             <div style={{ display: 'flex', gap: '0.5rem' }}><Clock size={18} /> {new Date(event.event_time).toLocaleString('pt-BR')}</div>
                         </div>
+
 
                         {/* BEER SUMMARY - RESTORED */}
                         <div style={{ background: 'var(--surface-container-low)', padding: '1.5rem', borderRadius: '4px' }}>
@@ -160,10 +217,10 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                             <div style={{ borderTop: '1px solid var(--outline-variant)', paddingTop: '2rem' }}>
                                 <h4 style={{ fontSize: '0.8rem', fontWeight: 900, marginBottom: '1.5rem' }}>CONTROLE DE QUITAÇÃO</h4>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                    {Object.values(groupedAttendees).map((group: any) => {
+                                    {Object.entries(groupedAttendees).map(([attendeeUserId, group]: [string, any]) => {
                                         const isAllPaid = group.records.every((r: any) => r.is_paid)
                                         return (
-                                            <div key={group.profile.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--surface-container-high)', borderRadius: '4px' }}>
+                                            <div key={`${event.id}-${attendeeUserId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--surface-container-high)', borderRadius: '4px' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                                     <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden' }}>
                                                         {group.profile.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%' }} />}
@@ -185,10 +242,22 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                     {!isAllPaid && (
                                                         <button 
                                                             onClick={() => sendReminder(event, group.profile, group.total)}
-                                                            style={{ background: '#25D366', color: 'white', border: 'none', padding: '0.5rem', borderRadius: '4px', cursor: 'pointer' }}
+                                                            className="btn-whatsapp"
+                                                            style={{ 
+                                                                background: '#25D366', 
+                                                                color: 'white', 
+                                                                border: 'none', 
+                                                                padding: '0.6rem', 
+                                                                borderRadius: '8px', 
+                                                                cursor: 'pointer',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                boxShadow: '0 4px 12px rgba(37, 211, 102, 0.2)'
+                                                            }}
                                                             title="Enviar lembrete WhatsApp"
                                                         >
-                                                            <MessageCircle size={16} />
+                                                            <MessageCircle size={18} />
                                                         </button>
                                                     )}
                                                 </div>
