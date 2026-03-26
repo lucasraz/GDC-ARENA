@@ -301,11 +301,24 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                         const bp = availableBeers.find(b => b.id === r.selected_beer)?.price || 0
                                         return (
                                             <div key={r.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
-                                                <span style={{ fontWeight: 600, opacity: r.is_paid ? 0.4 : 1 }}>{r.guest_name || 'VOCÊ'} <small style={{ fontWeight: 400, fontSize: '0.65rem' }}>({r.selected_beer.toUpperCase()})</small></span>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                    <Trash2 
+                                                        size={14} 
+                                                        onClick={() => handleLeave(r.id)} 
+                                                        style={{ 
+                                                            color: '#E57373', 
+                                                            cursor: 'pointer',
+                                                            opacity: r.is_paid ? 0.3 : 0.8 
+                                                        }} 
+                                                    />
+
+                                                    <span style={{ fontWeight: 600, opacity: r.is_paid ? 0.4 : 1 }}>{r.guest_name || 'VOCÊ'} <small style={{ fontWeight: 400, fontSize: '0.65rem' }}>({r.selected_beer.toUpperCase()})</small></span>
+                                                </div>
                                                 <span style={{ fontWeight: 900, color: r.is_paid ? '#81C784' : 'inherit', fontSize: '0.75rem' }}>{r.is_paid ? '✓ PAGO' : `R$ ${(event.price + bp).toFixed(2)}`}</span>
                                             </div>
                                         )
                                     })}
+
                                 </div>
                             </div>
                         )}
