@@ -81,3 +81,10 @@ GDC-ARENA/
 3. **Master Key**: RLS Policy ensures data integrity while allowing cross-user updates for authors.
 4. **Receipts**: Automated WhatsApp confirmation with dynamic content (Event, Guests, Beers).
 
+## ⚙️ Environment Variables (Vercel Deployment)
+Mandatory variables to be set in Vercel to avoid `MIDDLEWARE_INVOCATION_FAILED`:
+- `NEXT_PUBLIC_SUPABASE_URL`: Your project URL from Supabase dashboard.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your project Anon Key from Supabase dashboard.
+- `SUPABASE_SERVICE_ROLE_KEY`: (Internal/Backend) for high-privilege operations (Layer 2).
+
+
