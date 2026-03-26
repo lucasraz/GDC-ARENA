@@ -62,6 +62,32 @@ GDC-ARENA/
 - [x] TECH STACK APPROVAL (Excluíndo Stripe conforme pedido do usuário).
 - [x] Initial project scaffold (Next.js/Supabase/Testing).
 - [x] First product directive created (User Profile).
+### 📐 Design System & Patterns
+- **Glassmorphism**: UI elements use `backdrop-filter: blur(10px)` with translucent backgrounds (`rgba(0,0,0,0.8)`).
+- **Responsive Utilities**:
+  - `.desktop-only`: `display: none` below 768px.
+  - `.mobile-only`: `display: none` above 768px.
+- **Tactical Scaling**: Elements in `TacticalField.tsx` use `.tactical-shield` (56px desktop / 38px mobile) and `.tactical-label` classes for unified responsive behavior.
+- **Mobile Navigation**: Replaced bottom navigation with a top-level **Drawer Menu** (`MobileNavigation.tsx`) for a cleaner, functional "Premium" look.
+
+### 🚀 Deployment & Environment
+- **Platform**: Vercel (Production ready).
+- **Mandatory Environment Variables**:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY` (Backend logic).
+
+### 🛠️ Key Components
+- `Header.tsx`: Server Component for global data.
+- `MobileNavigation.tsx`: Client Drawer for mobile links.
+- `TacticalField.tsx`: Responsive 4-3-3 soccer field visualization.
+- `ProfileForm.tsx`: User settings with display name preference.
+
+### 📅 Next Steps
+1. **Tenant Orchestration**: Finalize dynamic tenant discovery.
+2. **NotebookLM Automation**: Integrate automated editorial cycles for news.
+3. **Performance Monitoring**: Monitor Vercel metrics for cold starts.
+
 - [x] Implementations (Backend Orchestration and Repositories - User Profile).
 - [ ] Implement Tenant Discovery/Creation logic (for new users).
 - [x] UI Components for Profile Management (based on Design System).

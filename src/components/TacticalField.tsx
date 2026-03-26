@@ -97,7 +97,7 @@ export default function TacticalField({ squad }: TacticalFieldProps) {
                             }}
                         >
                             {/* Shield */}
-                            <div style={{ width: '56px', height: '56px', marginBottom: '8px', position: 'relative', filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.6))' }}>
+                            <div className="tactical-shield">
                                 {logo ? (
                                     <img src={logo} alt={player.club} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                 ) : (
@@ -111,32 +111,25 @@ export default function TacticalField({ squad }: TacticalFieldProps) {
                             background: 'var(--primary)', 
                             border: '2px solid white', 
                             borderRadius: '50%', 
-                            width: '22px', 
-                            height: '22px', 
+                            width: 'min(22px, 5vw)', 
+                            height: 'min(22px, 5vw)', 
                             display: 'flex', 
                             alignItems: 'center', 
                             justifyContent: 'center', 
                             zIndex: 12,
                             boxShadow: '0 2px 4px rgba(0,0,0,0.3)'
                           }}>
-                            <Star size={12} style={{ color: '#000', fill: '#000' }} />
+                            <Star size={10} style={{ color: '#000', fill: '#000' }} />
                           </div>
                         )}
                             </div>
 
                             {/* Label */}
-                            <div style={{
-                                background: 'rgba(0,0,0,0.95)',
-                                padding: '0.2rem 0.6rem',
-                                borderRadius: '3px',
-                                borderBottom: '3px solid var(--primary)',
-                                textAlign: 'center',
-                                minWidth: '100px', // Ensures labels are consistent and anchored from center
-                                boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
-                            }}>
-                                <div style={{ fontSize: '0.7rem', color: '#fff', fontWeight: 800, whiteSpace: 'nowrap', textTransform: 'uppercase' }}>{player.name}</div>
-                                <div style={{ fontSize: '0.6rem', color: 'var(--primary)', fontWeight: 800 }}>C$ {player.price.toFixed(2)}</div>
+                            <div className="tactical-label">
+                                <div>{player.name}</div>
+                                <div>C$ {player.price.toFixed(2)}</div>
                             </div>
+
                         </motion.div>
                     )
                 })
