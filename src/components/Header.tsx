@@ -20,18 +20,18 @@ export default async function Header() {
     : profile?.full_name?.split(' ')[0] || 'NAVEGADOR'
 
   return (
-    <nav className="glass-nav">
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem', padding: '0 0.5rem' }}>
+    <nav className="glass-nav" style={{ padding: '0.75rem 0.5rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         
         <MobileNavigation userLoggedIn={!!user} />
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'min(1.5rem, 4vw)', minWidth: 0 }}>
-          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'min(1.2rem, 4vw)', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1 }}>
+          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'min(0.8rem, 3vw)', minWidth: 0 }}>
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={100} 
-              height={100} 
+              width={90} 
+              height={90} 
               className="desktop-only"
               style={{ borderRadius: '4px' }}
             />
@@ -39,26 +39,24 @@ export default async function Header() {
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={56} 
-              height={56} 
+              width={42} 
+              height={42} 
               className="mobile-only"
               style={{ borderRadius: '4px', flexShrink: 0 }}
             />
 
-            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', minWidth: 0 }}>
-                <h2 className="shimmer-text" style={{ fontSize: 'clamp(1.1rem, 5vw, 1.7rem)', letterSpacing: '-0.02em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap' }}>GDC ARENA</h2>
-                <img 
-                  src="/vasco-logo.png" 
-                  alt="Vasco" 
-                  style={{ 
-                    height: 'clamp(24px, 7vw, 38px)', 
-                    marginLeft: '2.5px',
-                    flexShrink: 0,
-                    filter: 'drop-shadow(0px 0px 8px rgba(255,255,255,0.4))'
-                  }} 
-                />
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', minWidth: 0 }}>
+              <h2 className="shimmer-text" style={{ fontSize: 'clamp(0.9rem, 4.3vw, 1.5rem)', letterSpacing: '-0.02em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap' }}>GDC ARENA</h2>
+              <img 
+                src="/vasco-logo.png" 
+                alt="Vasco" 
+                style={{ 
+                  height: 'clamp(20px, 6vw, 36px)', 
+                  marginLeft: '2px',
+                  flexShrink: 0,
+                  filter: 'drop-shadow(0px 0px 8px rgba(255,255,255,0.4))'
+                }} 
+              />
             </div>
           </Link>
         </div>
@@ -68,7 +66,7 @@ export default async function Header() {
           <HeaderLinks userLoggedIn={!!user} />
         </div>
 
-        <div style={{ display: 'flex', gap: 'min(1rem, 2vw)', alignItems: 'center', flexShrink: 0 }}>
+        <div style={{ display: 'flex', gap: 'min(1rem, 2vw)', alignItems: 'center', flexShrink: 0, marginLeft: 'auto' }}>
           {user && profile ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: 'min(1rem, 2vw)', marginLeft: 'min(0.5rem, 2vw)', paddingLeft: 'min(1rem, 2vw)', borderLeft: '1px solid var(--outline-variant)' }}>
               <div className="desktop-only" style={{ textAlign: 'center' }}>
@@ -90,13 +88,14 @@ export default async function Header() {
               </form>
             </div>
           ) : (
-            <a href="/login" className="btn-primary" style={{ fontSize: 'clamp(0.6rem, 2.8vw, 0.75rem)', padding: '0.4rem 0.7rem', flexShrink: 0, borderRadius: '4px', marginLeft: '0.25rem' }}>
+            <a href="/login" className="btn-primary" style={{ fontSize: 'clamp(0.6rem, 2.5vw, 0.75rem)', padding: '0.4rem 0.6rem', flexShrink: 0, borderRadius: '4px', letterSpacing: '0.05em' }}>
               ENTRAR
             </a>
           )}
         </div>
       </div>
     </nav>
+
   )
 }
 
