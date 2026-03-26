@@ -19,11 +19,11 @@ export default function NoticiasPage() {
               src="/vasco-logo.png" 
               alt="Vasco" 
               style={{ 
-                height: 'clamp(60px, 12vw, 100px)', 
-                filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))',
-                transform: 'rotate(-5deg)'
+                height: 'clamp(60px, 12vw, 120px)', 
+                filter: 'drop-shadow(0px 4px 4px rgba(0,0,0,0.4)) drop-shadow(0px 10px 20px rgba(0,0,0,1))'
               }} 
             />
+
           </div>
 
 

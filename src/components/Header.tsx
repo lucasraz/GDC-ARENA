@@ -34,10 +34,11 @@ export default async function Header() {
                   src="/vasco-logo.png" 
                   alt="Vasco" 
                   style={{ 
-                    height: '28px', 
-                    filter: 'drop-shadow(0px 6px 8px rgba(0,0,0,0.8))'
+                    height: '32px', 
+                    filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) drop-shadow(0px 6px 12px rgba(0,0,0,0.8))'
                   }} 
                 />
+
               </div>
               <p style={{ fontSize: '0.65rem', opacity: 0.6, fontWeight: 700, letterSpacing: '0.05em', marginTop: '0.1rem' }}>GIGANTES DA CERVA</p>
             </div>
