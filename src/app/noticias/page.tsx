@@ -35,23 +35,23 @@ export default function NoticiasPage() {
         </div>
       </section>
 
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem 4rem', display: 'grid', gridTemplateColumns: '3fr 1.2fr', gap: '3rem' }}>
+      <section className="noticias-grid">
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
           {articles.map((article: any, index: number) => (
             <article key={article.id} style={{ borderBottom: index === articles.length - 1 ? 'none' : '1px solid var(--outline-variant)', paddingBottom: '3rem' }}>
-              <div style={{ display: 'flex', gap: '2rem', flexDirection: 'row' }}>
+              <div className="article-container">
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
                     <span className="label" style={{ background: 'var(--primary-container)', color: 'white', padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}>{article.category}</span>
                     <span className="label" style={{ opacity: 0.5, fontSize: '0.75rem' }}>{article.date}</span>
                   </div>
-                  <h2 style={{ fontSize: '2rem', marginBottom: '1.25rem', textTransform: 'none', lineHeight: '1.2' }}>{article.title}</h2>
+                  <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', marginBottom: '1.25rem', textTransform: 'none', lineHeight: '1.2' }}>{article.title}</h2>
                   <p style={{ fontSize: '1.1rem', lineHeight: '1.6', opacity: 0.85, fontFamily: 'var(--font-newsreader)' }}>{article.excerpt}</p>
                 </div>
 
                 {article.image_url && (
-                  <div style={{ width: '300px', height: '200px', position: 'relative', flexShrink: 0, borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--outline-variant)' }}>
+                  <div className="article-image" style={{ width: '300px', height: '200px', position: 'relative', flexShrink: 0, borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--outline-variant)' }}>
                     <NextImage src={article.image_url} alt={article.title} fill style={{ objectFit: 'cover' }} />
                   </div>
                 )}
@@ -73,6 +73,7 @@ export default function NoticiasPage() {
         </aside>
 
       </section>
+
     </main>
   )
 }

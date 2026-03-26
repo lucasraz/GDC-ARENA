@@ -55,6 +55,7 @@ export default async function Header() {
             href="https://www.instagram.com/gigantesdacervaa?igsh=MWJ6Njg2YnRrMGFjdA==" 
             target="_blank" 
             rel="noopener noreferrer"
+            className="desktop-only"
             style={{ opacity: 0.8, display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'opacity 0.2s', textDecoration: 'none', color: 'inherit' }}
           >
             <img 
@@ -73,13 +74,13 @@ export default async function Header() {
 
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           {user && profile ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: '1rem', paddingLeft: '1.5rem', borderLeft: '1px solid var(--outline-variant)' }}>
-              <div style={{ textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: '1rem', paddingLeft: 'min(1.5rem, 5vw)', borderLeft: '1px solid var(--outline-variant)' }}>
+              <div className="desktop-only" style={{ textAlign: 'center' }}>
                  <p style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '0.1rem' }}>BEM-VINDO(A)</p>
                  <p style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase' }}>{displayName}</p>
               </div>
 
-              <a href="/profile" style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--primary)', background: 'var(--surface)' }}>
+              <a href="/profile" style={{ width: 'min(40px, 10vw)', height: 'min(40px, 10vw)', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--primary)', background: 'var(--surface)' }}>
                 {profile.avatar_url ? (
                   <img src={profile.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
@@ -88,7 +89,7 @@ export default async function Header() {
                   </div>
                 )}
               </a>
-              <form action={logout}>
+              <form action={logout} className="desktop-only">
                 <button 
                   type="submit" 
                   className="btn-primary" 
@@ -110,6 +111,7 @@ export default async function Header() {
             </a>
           )}
         </div>
+
       </div>
     </nav>
   )

@@ -108,7 +108,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
       </header>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
           <div>
             <label className="input-label">NOME COMPLETO</label>
             <input 
@@ -132,7 +132,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
           <div>
             <label className="input-label">APELIDO (GDC-ID)</label>
             <input 
@@ -158,7 +158,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
           <div>
             <label className="input-label">TELEFONE / WHATSAPP</label>
             <input 
@@ -185,6 +185,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
              </select>
           </div>
         </div>
+
 
         {message && (
           <motion.div 

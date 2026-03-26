@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import BottomNav from '@/components/BottomNav'
 
 export default function RootLayout({
   children,
@@ -17,14 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${epilogue.variable} ${newsreader.variable} ${inter.variable}`}>
-      <body className="antialiased" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <body className="antialiased" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', paddingBottom: '64px' }}>
         <Header />
         <div style={{ flex: 1 }}>
           {children}
         </div>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   )
 }
+
 

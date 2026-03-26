@@ -22,7 +22,8 @@ export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+    <div className="desktop-only" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+
       {links.map((link) => {
         const isActive = pathname === link.href
         return (
