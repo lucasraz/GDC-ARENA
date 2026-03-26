@@ -23,7 +23,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
     username: initialData?.username || '',
     display_name_preference: initialData?.display_name_preference || 'full_name',
     birth_date: initialData?.birth_date || '',
-    whatsapp: initialData?.whatsapp || '',
+    whatsapp: initialData?.whatsapp || '+55',
     membership_type: initialData?.membership_type || 'nenhum',
   })
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
@@ -166,7 +166,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
               className="input-field"
               value={formData.whatsapp}
               onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-              placeholder="(21) 99999-9999"
+              placeholder="+55 (21) 99999-9999"
               required
             />
           </div>
