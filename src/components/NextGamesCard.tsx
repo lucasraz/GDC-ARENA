@@ -58,19 +58,6 @@ export default function NextGamesCard() {
         ))}
       </div>
       
-      <button style={{ 
-        width: '100%', 
-        marginTop: '1.5rem', 
-        background: 'transparent', 
-        border: '1px solid var(--outline-variant)', 
-        color: 'inherit', 
-        padding: '0.6rem', 
-        fontSize: '0.75rem', 
-        fontWeight: 700,
-        cursor: 'pointer'
-      }}>
-        VER TABELA COMPLETA →
-      </button>
     </div>
   )
 }

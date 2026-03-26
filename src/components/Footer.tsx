@@ -12,6 +12,29 @@ export default function Footer() {
       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '0.05em', opacity: 0.8 }}>GDC ARENA</h2>
+          
+          <a 
+            href="https://www.instagram.com/gigantes_da_cerva/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ 
+                color: 'var(--primary)', 
+                opacity: 0.8, 
+                transition: 'opacity 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textDecoration: 'none',
+                marginBottom: '1rem'
+            }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
           <p style={{ fontSize: '0.75rem', opacity: 0.5, letterSpacing: '0.1em', fontWeight: 500 }}>
             © {currentYear} GIGANTES DA CERVA. TODOS OS DIREITOS RESERVADOS.
           </p>

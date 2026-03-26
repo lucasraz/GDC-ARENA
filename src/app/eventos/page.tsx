@@ -15,6 +15,7 @@ export default async function EventosPage() {
   const TENANT_ID = 'tenant_1'
 
   // Fetch Events with profiles and attendees (including attendee profiles and their choice)
+  // We fetch without comments join first to ensure events appear even if migration hasn't run
   const { data: events, error } = await supabase
     .from('events')
     .select(`
@@ -27,16 +28,28 @@ export default async function EventosPage() {
             guest_name,
             is_paid,
             profiles(full_name, avatar_url, whatsapp)
-        ),
-        comments:event_comments(
-            id,
-            author_id,
-            text,
-            created_at,
-            author_profile:profiles(full_name, avatar_url)
         )
     `)
     .order('event_time', { ascending: true })
+
+  // Safely fetch comments as a second step if events were found
+  let eventsWithComments = events || []
+  if (events && events.length > 0) {
+    const { data: allComments } = await supabase
+      .from('event_comments')
+      .select(`
+          *,
+          author_profile:profiles(full_name, avatar_url)
+      `)
+      .in('event_id', events.map(e => e.id))
+
+    if (allComments) {
+        eventsWithComments = events.map(event => ({
+            ...event,
+            comments: allComments.filter(c => c.event_id === event.id)
+        }))
+    }
+  }
 
   if (error) {
       console.error('Error fetching events:', error)
@@ -57,7 +70,7 @@ export default async function EventosPage() {
           <EventsClient 
             userId={user?.id} 
             tenantId={TENANT_ID} 
-            initialEvents={events || []} 
+            initialEvents={eventsWithComments} 
           />
         </div>
       </section>
