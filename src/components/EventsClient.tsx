@@ -18,6 +18,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { joinEvent, leaveEvent, deleteEvent, saveEvent, togglePaymentStatus } from '@/app/actions/event_actions'
 import EventEditor from './EventEditor'
+import EventCommentsSection from './EventCommentsSection'
 
 export default function EventsClient({ userId, tenantId, initialEvents }: any) {
   const router = useRouter()
@@ -489,6 +490,12 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                         </div>
                                     </div>
                                 )}
+
+                                <EventCommentsSection 
+                                    eventId={event.id}
+                                    currentUserId={userId}
+                                    initialComments={event.comments || []}
+                                />
                             </motion.div>
                         )}
                     </AnimatePresence>

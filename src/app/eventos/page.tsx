@@ -27,8 +27,14 @@ export default async function EventosPage() {
             guest_name,
             is_paid,
             profiles(full_name, avatar_url, whatsapp)
+        ),
+        comments:event_comments(
+            id,
+            author_id,
+            text,
+            created_at,
+            author_profile:profiles(full_name, avatar_url)
         )
-
     `)
     .order('event_time', { ascending: true })
 
