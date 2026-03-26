@@ -183,7 +183,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem' }}>GIGANTE ARENA</span>
+                                <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem' }}>GDC ARENA</span>
                                 {(event.attendees?.filter((r: any) => !r.is_paid).reduce((sum: number, r: any) => {
                                     const bp = availableBeers.find(b => b.id === r.selected_beer)?.price || 0
                                     return sum + event.price + bp
@@ -198,6 +198,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                              </div>
                              {userId === event.author_id && <Trash2 size={20} onClick={() => handleDeleteEvent(event.id)} style={{ color: isDeleting === event.id ? 'var(--outline-variant)' : '#E57373', cursor: 'pointer' }} />}
                         </div>
+
                         <div>
                             <h3 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>{event.title}</h3>
                             <p style={{ opacity: 0.7 }}>{event.description}</p>
@@ -251,16 +252,21 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                             background: isAllPaid ? 'transparent' : 'var(--primary)', 
                                                             border: isAllPaid ? '1px solid var(--primary)' : 'none', 
                                                             color: isAllPaid ? 'var(--primary)' : 'black', 
-                                                            padding: '0.5rem 1.25rem', 
+                                                            padding: '0 1.25rem', 
                                                             borderRadius: '4px', 
                                                             fontSize: '0.75rem', 
                                                             fontWeight: 900, 
                                                             cursor: 'pointer',
-                                                            minWidth: '80px'
+                                                            minWidth: '80px',
+                                                            height: '38px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center'
                                                         }}
                                                     >
                                                         {isAllPaid ? 'PAGO ✓' : 'QUITAR'}
                                                     </button>
+
 
                                                     <button 
                                                         onClick={() => sendWhatsAppMessage(event, group.profile, group.records, isAllPaid, group.totalPending)}
