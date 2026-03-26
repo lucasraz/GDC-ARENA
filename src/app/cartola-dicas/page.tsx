@@ -65,17 +65,7 @@ export default function CartolaTipsPage() {
         </div>
       </section>
 
-      {/* Subscription Teaser (Premium) */}
-      <section className="section-container" style={{ textAlign: 'center', background: 'var(--surface)' }}>
-         <div className="glass-card" style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h2 style={{ color: 'var(--primary)' }}>ACESSO PREMIUM</h2>
-            <p style={{ margin: '1.5rem 0', opacity: 0.9 }}>
-              Tenha acesso a planilhas detalhadas, scout em tempo real e o grupo de 
-              estratégia exclusiva dos Navegadores.
-            </p>
-            <button className="btn-primary">ASSINAR AGORA</button>
-         </div>
-      </section>
     </main>
+
   )
 }
