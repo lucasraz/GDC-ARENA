@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 }
 
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default function RootLayout({
   children,
@@ -16,10 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${epilogue.variable} ${newsreader.variable} ${inter.variable}`}>
-      <body className="antialiased">
+      <body className="antialiased" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
-        {children}
+        <div style={{ flex: 1 }}>
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   )
 }
+

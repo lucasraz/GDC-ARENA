@@ -17,18 +17,40 @@ export default async function Header() {
   return (
     <nav className="glass-nav">
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Image 
-            src="/logo.png" 
-            alt="GDC ARENA Logo" 
-            width={60} 
-            height={60} 
-            style={{ borderRadius: '4px' }}
-          />
-          <h2 style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900 }}>GDC ARENA</h2>
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <Image 
+              src="/logo.png" 
+              alt="GDC ARENA Logo" 
+              width={60} 
+              height={60} 
+              style={{ borderRadius: '4px' }}
+            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <h2 style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900, lineHeight: 1 }}>GDC ARENA</h2>
+              <p style={{ fontSize: '0.65rem', opacity: 0.6, fontWeight: 700, letterSpacing: '0.05em', marginTop: '0.2rem' }}>GIGANTES DA CERVA</p>
+            </div>
+          </Link>
+
+          <a 
+            href="https://www.instagram.com/gigantesdacervaa?igsh=MWJ6Njg2YnRrMGFjdA==" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ opacity: 0.8, display: 'flex', alignItems: 'center', transition: 'opacity 0.2s', background: 'white', padding: '4px', borderRadius: '4px' }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}
+          >
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+              alt="Instagram" 
+              style={{ width: '18px', height: '18px' }}
+            />
+          </a>
+        </div>
+
         
         <HeaderLinks userLoggedIn={!!user} />
+
 
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           {user && profile ? (
