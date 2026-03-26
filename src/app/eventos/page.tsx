@@ -2,7 +2,11 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import EventsClient from '../../components/EventsClient'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function EventosPage() {
+
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 

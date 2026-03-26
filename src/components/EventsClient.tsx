@@ -9,12 +9,16 @@ import EventEditor from './EventEditor'
 
 export default function EventsClient({ userId, tenantId, initialEvents }: any) {
   const router = useRouter()
-  const [events, setEvents] = useState(initialEvents)
+  // No more local state for events, use props directly to allow router.refresh()
   const [isAdding, setIsAdding] = useState(false)
   const [isDeleting, setIsDeleting] = useState<string | null>(null)
   
   const [selectedBeers, setSelectedBeers] = useState<Record<string, string>>({})
   const [guestInputs, setGuestInputs] = useState<Record<string, { name: string, beer: string, isAdding: boolean }>>({})
+
+  // UI mapping
+  const events = initialEvents
+
 
   const handleJoin = async (eventId: string, guestName?: string, beer?: string) => {
     if (!userId) {
