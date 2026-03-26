@@ -87,8 +87,9 @@ export default function CommentsSection({ cronicaId, currentUserId, initialComme
           </button>
         </form>
       ) : (
-        <div className="glass-card" style={{ padding: '2rem', textAlign: 'center', marginBottom: '3rem' }}>
-             <p style={{ opacity: 0.5 }}>Faça login para participar da conversa e deixar sua marca no GDC.</p>
+        <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', marginBottom: '3rem', border: '1px solid var(--outline-variant)' }}>
+             <p style={{ opacity: 0.7, marginBottom: '1.5rem', fontSize: '1.1rem' }}>Sua opinião é importante. Faça login para participar da discussão.</p>
+             <button onClick={() => router.push('/login')} className="btn-primary" style={{ padding: '0.75rem 3rem' }}>ENTRAR NO GDC</button>
         </div>
       )}
 

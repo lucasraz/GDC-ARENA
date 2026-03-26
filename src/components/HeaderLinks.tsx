@@ -11,9 +11,10 @@ export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
   const pathname = usePathname()
 
   const links = [
-    { href: '/', label: 'CRÔNICAS' },
     { href: '/noticias', label: 'NOTÍCIAS' },
+    { href: '/', label: 'CRÔNICAS' },
     { href: '/cartola-dicas', label: 'CARTOLA-DICAS' },
+    { href: '/eventos', label: 'EVENTOS' },
   ]
 
   if (userLoggedIn) {

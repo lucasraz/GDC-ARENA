@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { logout } from '@/app/actions/auth_actions'
 import { userRepository } from '@execution/repositories/user_repository'
 import HeaderLinks from './HeaderLinks'
-
 
 export default async function Header() {
   const supabase = createClient()
@@ -17,7 +17,7 @@ export default async function Header() {
   return (
     <nav className="glass-nav">
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Image 
             src="/logo.png" 
             alt="GDC ARENA Logo" 
@@ -26,7 +26,7 @@ export default async function Header() {
             style={{ borderRadius: '4px' }}
           />
           <h2 style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900 }}>GDC ARENA</h2>
-        </div>
+        </Link>
         
         <HeaderLinks userLoggedIn={!!user} />
 
