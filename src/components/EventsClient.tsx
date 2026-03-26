@@ -261,7 +261,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                                 background: '#25D366', 
                                                                 color: 'white', 
                                                                 border: 'none', 
-                                                                padding: '0.6rem', 
+                                                                padding: '0.4rem', 
                                                                 borderRadius: '8px', 
                                                                 cursor: 'pointer',
                                                                 display: 'flex',
@@ -270,14 +270,14 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                                 boxShadow: '0 4px 12px rgba(37, 211, 102, 0.3)',
                                                                 width: '38px',
                                                                 height: '38px',
-                                                                transition: 'transform 0.2s ease'
+                                                                transition: 'transform 0.2s ease',
+                                                                overflow: 'hidden'
                                                             }}
                                                             title="Enviar lembrete WhatsApp"
                                                         >
-                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M12.031 6.172c-2.32 0-4.518.905-6.16 2.547-3.216 3.216-3.34 8.232-.385 11.597L4.47 23.32l3.141-.824c1.336.727 2.85 1.107 4.416 1.107h.004c5.158 0 9.349-4.195 9.351-9.353.001-2.498-.971-4.846-2.735-6.611-1.766-1.765-4.111-2.738-6.616-2.738zm5.405 12.611c-.243.684-1.188 1.258-1.64 1.345-.452.087-.901.151-2.548-.485-2.098-.813-3.414-2.883-3.518-3.023-.105-.138-.853-1.133-.853-2.161 0-1.026.541-1.531.733-1.737.193-.205.419-.257.558-.257h.4c.129 0 .216.035.321.282.115.27.393.957.427 1.026.035.068.057.148.012.239-.045.09-.068.148-.135.226-.068.077-.143.174-.207.247-.072.079-.148.163-.063.308.085.145.378.623.811 1.008.558.496 1.03.65 1.18.725.148.075.234.062.322-.039.088-.101.373-.434.475-.584.103-.151.205-.126.346-.075.14.051.892.421 1.047.497l.259.128c.155.077.258.114.296.177.038.063.038.368-.205.654z" />
-                                                            </svg>
+                                                            <img src="/icons/whatsapp-icon.png" alt="WhatsApp" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                         </button>
+
                                                     )}
 
                                                 </div>
