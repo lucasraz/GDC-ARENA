@@ -29,11 +29,14 @@ export default async function ProfilePage() {
           initialData={{
             full_name: profile?.full_name || '',
             username: profile?.username || '',
+            nickname: profile?.nickname || '',
+            display_name_preference: profile?.display_name_preference || 'full_name',
             avatar_url: profile?.avatar_url || '',
             birth_date: profile?.birth_date || '',
             whatsapp: profile?.whatsapp || '',
             membership_type: profile?.membership_type || 'nenhum'
           }}
+
         />
         
 

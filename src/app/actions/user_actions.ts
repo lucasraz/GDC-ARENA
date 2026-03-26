@@ -11,6 +11,8 @@ export async function updateProfile(userId: string, tenantId: string, formData: 
   try {
     const full_name = formData.get('full_name') as string
     const username = formData.get('username') as string
+    const nickname = formData.get('nickname') as string
+    const display_name_preference = formData.get('display_name_preference') as any
     const birth_date = formData.get('birth_date') as string
     const whatsapp = formData.get('whatsapp') as string
     const membership_type = formData.get('membership_type') as any
@@ -20,10 +22,13 @@ export async function updateProfile(userId: string, tenantId: string, formData: 
     await UserService.updateProfile(userId, tenantId, {
       full_name,
       username,
+      nickname,
+      display_name_preference,
       birth_date,
       whatsapp,
       membership_type,
     }, avatarFile)
+
 
     // Revalidate the path to refresh UI
     revalidatePath('/')

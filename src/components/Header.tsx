@@ -14,6 +14,10 @@ export default async function Header() {
   
   const profile = user ? await userRepository.findById(user.id, TENANT_ID) : null
 
+  const displayName = profile?.display_name_preference === 'nickname' && profile?.nickname 
+    ? profile.nickname 
+    : profile?.full_name?.split(' ')[0] || 'NAVEGADOR'
+
   return (
     <nav className="glass-nav">
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -38,10 +42,10 @@ export default async function Header() {
                     filter: 'drop-shadow(0px 0px 6px rgba(255,255,255,0.3)) drop-shadow(0px 4px 10px rgba(255,255,255,0.15))'
                   }} 
                 />
-
               </div>
               <p style={{ fontSize: '0.65rem', opacity: 0.6, fontWeight: 700, letterSpacing: '0.05em', marginTop: '0.1rem' }}>GIGANTES DA CERVA</p>
             </div>
+
 
 
           </Link>
@@ -71,7 +75,7 @@ export default async function Header() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: '1rem', paddingLeft: '1.5rem', borderLeft: '1px solid var(--outline-variant)' }}>
               <div style={{ textAlign: 'center' }}>
                  <p style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '0.1rem' }}>BEM-VINDO(A)</p>
-                 <p style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase' }}>{profile.full_name?.split(' ')[0] || 'NAVEGADOR'}</p>
+                 <p style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase' }}>{displayName}</p>
               </div>
 
               <a href="/profile" style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--primary)', background: 'var(--surface)' }}>
