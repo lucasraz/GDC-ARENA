@@ -466,7 +466,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                                     justifyContent: 'center'
                                                                 }}
                                                             >
-                                                                {isAllPaid ? 'VER' : 'QUITAR'}
+                                                                {isAllPaid ? 'PAGO' : 'QUITAR'}
                                                             </button>
                                                             <button 
                                                                 onClick={(e) => { e.stopPropagation(); sendWhatsAppMessage(event, group.profile, group.records, isAllPaid, group.totalPending); }}
