@@ -226,19 +226,19 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                   }}
                 >
                     {/* Header Row: Icons and Share */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                            <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem', fontSize: '0.6rem' }}>GDC ARENA</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '1rem' }}>
+                         <div style={{ display: 'flex', gap: 'clamp(0.4rem, 2vw, 0.75rem)', alignItems: 'center', minWidth: 0, flex: 1 }}>
+                            <span className="label" style={{ background: 'var(--primary)', color: 'black', padding: '0.2rem 0.6rem', fontSize: '0.6rem', whiteSpace: 'nowrap', flexShrink: 0 }}>GDC ARENA</span>
                             
                             {/* Summary Icons for Collapsed State */}
-                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', opacity: 0.6, marginLeft: '0.5rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem' }}>
+                            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', opacity: 0.6, minWidth: 0, marginLeft: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', flexShrink: 0 }}>
                                     <Users size={14} /> <span>{attendeeCount}</span>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', flexShrink: 0 }}>
                                     <MessageCircle size={14} /> <span>{event.comments?.length || 0}</span>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 900, color: 'var(--primary)' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 900, color: 'var(--primary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
                                     <DollarSign size={14} /> <span>R$ {event.price.toFixed(2)}</span>
                                 </div>
                             </div>
