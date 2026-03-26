@@ -51,14 +51,19 @@ export default function MobileNavigation({ userLoggedIn }: MobileNavigationProps
                <h2 className="shimmer-text" style={{ fontSize: '1rem', fontWeight: 900 }}>GDC ARENA</h2>
                <button onClick={() => setIsOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white' }}><X size={24} /></button>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} onClick={() => setIsOpen(false)}>
-               <HeaderLinks userLoggedIn={userLoggedIn} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+               <HeaderLinks 
+                 userLoggedIn={userLoggedIn} 
+                 isMobile={true} 
+                 onLinkClick={() => setIsOpen(false)} 
+               />
                {userLoggedIn && (
                  <form action={logout}>
                    <button type="submit" className="btn-primary" style={{ width: '100%', background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)', padding: '0.8rem', marginTop: '1rem' }}>SAIR</button>
                  </form>
                )}
             </div>
+
           </div>
         </div>
       )}

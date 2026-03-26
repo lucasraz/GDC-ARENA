@@ -5,9 +5,11 @@ import Link from 'next/link'
 
 interface HeaderLinksProps {
   userLoggedIn: boolean
+  isMobile?: boolean
+  onLinkClick?: () => void
 }
 
-export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
+export default function HeaderLinks({ userLoggedIn, isMobile = false, onLinkClick }: HeaderLinksProps) {
   const pathname = usePathname()
 
   const links = [
@@ -22,7 +24,12 @@ export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
   }
 
   return (
-    <div className="desktop-only" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+    <div className={isMobile ? "" : "desktop-only"} style={{ 
+      display: 'flex', 
+      gap: isMobile ? '2rem' : '1.5rem', 
+      alignItems: isMobile ? 'flex-start' : 'center',
+      flexDirection: isMobile ? 'column' : 'row'
+    }}>
 
       {links.map((link) => {
         const isActive = pathname === link.href
@@ -30,16 +37,20 @@ export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
           <Link 
             key={link.href} 
             href={link.href} 
+            onClick={onLinkClick}
             className="label" 
             style={{ 
               color: isActive ? 'var(--primary)' : 'inherit', 
               textDecoration: 'none', 
-              fontSize: '0.75rem',
-              fontWeight: isActive ? 900 : 500,
-              paddingBottom: '0.25rem',
-              borderBottom: isActive ? '2px solid var(--primary)' : '2px solid transparent',
+              fontSize: isMobile ? '1.1rem' : '0.75rem',
+              fontWeight: isActive ? 900 : 700,
+              paddingBottom: isMobile ? '0.5rem' : '0.25rem',
+              borderBottom: !isMobile && isActive ? '2px solid var(--primary)' : 'none',
+              borderLeft: isMobile && isActive ? '4px solid var(--primary)' : 'none',
+              paddingLeft: isMobile && isActive ? '1rem' : '0',
               transition: 'all 0.2s ease',
-              opacity: isActive ? 1 : 0.7
+              opacity: isActive ? 1 : 0.8,
+              letterSpacing: '0.05em'
             }}
           >
             {link.label}
@@ -49,3 +60,4 @@ export default function HeaderLinks({ userLoggedIn }: HeaderLinksProps) {
     </div>
   )
 }
+
