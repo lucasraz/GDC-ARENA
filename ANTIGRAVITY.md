@@ -72,4 +72,12 @@ GDC-ARENA/
 - [x] Integration of "Manuscrito Inteligente" (NotebookLM Search Base) for Cartola Tips.
 - [x] Visual Tactical Field (4-3-3) with real Club Crests (Brasões).
 - [x] Simplified Elite Command (Original Tactical 4-3-3).
+- [x] Financial Orchestration (Payment Status, Bulk Quitação, RLS Master Key).
 - [ ] Implement Tenant Discovery/Creation logic (for new users).
+
+## 💰 Financial Orchestration Rules (Layer 2)
+1. **Host Control**: Only the event creator can toggle payment status (is_paid).
+2. **Bulk Settlement**: Toggling a host marks all their guests as paid in a single operation.
+3. **Master Key**: RLS Policy ensures data integrity while allowing cross-user updates for authors.
+4. **Receipts**: Automated WhatsApp confirmation with dynamic content (Event, Guests, Beers).
+
