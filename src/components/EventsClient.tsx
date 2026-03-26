@@ -487,11 +487,13 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                     </div>
                                 )}
 
-                                <EventCommentsSection 
-                                    eventId={event.id}
-                                    currentUserId={userId}
-                                    initialComments={event.comments || []}
-                                />
+                                <div onClick={(e) => e.stopPropagation()}>
+                                    <EventCommentsSection 
+                                        eventId={event.id}
+                                        currentUserId={userId}
+                                        initialComments={event.comments || []}
+                                    />
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
