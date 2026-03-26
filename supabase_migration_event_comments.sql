@@ -27,8 +27,17 @@ CREATE POLICY "Authors can delete their own comments" ON event_comments
 CREATE POLICY "Authors can update their own comments" ON event_comments
     FOR UPDATE USING (auth.uid() = author_id);
     
+-- Function to handle updated_at
+CREATE OR REPLACE FUNCTION handle_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Trigger for updated_at
-CREATE OR REPLACE TRIGGER set_event_comments_updated_at
+CREATE TRIGGER set_event_comments_updated_at
 BEFORE UPDATE ON event_comments
 FOR EACH ROW
-EXECUTE FUNCTION moddatetime (updated_at);
+EXECUTE FUNCTION handle_updated_at();
