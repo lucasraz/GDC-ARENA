@@ -43,23 +43,15 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
   const handleTogglePayment = async (attendeeUserId: string, isPaid: boolean, event: any, hostProfile: any, personalRecords: any[]) => {
     const result = await togglePaymentStatus(event.id, attendeeUserId, isPaid, userId)
     if (result.success) {
-      if (isPaid) {
-          // Send Confirmation WhatsApp
-          const profileData = Array.isArray(hostProfile) ? hostProfile[0] : hostProfile
-          const phone = profileData?.whatsapp || profileData?.phone
-          if (phone) {
-              const guestList = personalRecords.filter(r => r.guest_name).map(r => r.guest_name).join(', ') || 'Apenas você'
-              const beersList = [...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')
-              const msg = `Olá ${profileData.full_name}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
-              window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank')
-          }
-      }
       router.refresh()
+    } else {
+        alert(result.error || 'Erro ao processar quitação.')
     }
   }
 
 
-  const sendReminder = (event: any, hostProfile: any, amount: number) => {
+
+  const sendWhatsAppMessage = (event: any, hostProfile: any, personalRecords: any[], isPaid: boolean, amount: number) => {
       // Handle both object and array response from Supabase
       const profileData = Array.isArray(hostProfile) ? hostProfile[0] : hostProfile
       const phone = profileData?.whatsapp || profileData?.phone
@@ -68,7 +60,16 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
           alert(`Telefone/WhatsApp não encontrado para ${profileData?.full_name || 'este usuário'}. Verifique se ele preencheu o campo no perfil.`)
           return
       }
-      const msg = `Olá ${profileData.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
+
+      let msg = ''
+      if (isPaid) {
+          const guestList = personalRecords.filter(r => r.guest_name).map(r => r.guest_name).join(', ') || 'Apenas você'
+          const beersList = [...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')
+          msg = `Olá ${profileData.full_name}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
+      } else {
+          msg = `Olá ${profileData.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
+      }
+      
       window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank')
   }
 
@@ -252,35 +253,31 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                         {isAllPaid ? 'PAGO ✓' : 'PAGO'}
                                                     </button>
 
-
-                                                    {!isAllPaid && (
-                                                        <button 
-                                                            onClick={() => sendReminder(event, group.profile, group.total)}
-                                                            className="btn-whatsapp"
-                                                            style={{ 
-                                                                background: '#25D366', 
-                                                                color: 'white', 
-                                                                border: 'none', 
-                                                                padding: '0.4rem', 
-                                                                borderRadius: '8px', 
-                                                                cursor: 'pointer',
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                justifyContent: 'center',
-                                                                boxShadow: '0 4px 12px rgba(37, 211, 102, 0.3)',
-                                                                width: '38px',
-                                                                height: '38px',
-                                                                transition: 'transform 0.2s ease',
-                                                                overflow: 'hidden'
-                                                            }}
-                                                            title="Enviar lembrete WhatsApp"
-                                                        >
-                                                            <img src="/icons/whatsapp-icon.png" alt="WhatsApp" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                        </button>
-
-                                                    )}
-
+                                                    <button 
+                                                        onClick={() => sendWhatsAppMessage(event, group.profile, group.records, isAllPaid, group.total)}
+                                                        className="btn-whatsapp"
+                                                        style={{ 
+                                                            background: isAllPaid ? '#4A90E2' : '#25D366', 
+                                                            color: 'white', 
+                                                            border: 'none', 
+                                                            padding: '0.4rem', 
+                                                            borderRadius: '8px', 
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            boxShadow: '0 4px 12px rgba(37, 211, 102, 0.3)',
+                                                            width: '38px',
+                                                            height: '38px',
+                                                            transition: 'transform 0.2s ease',
+                                                            overflow: 'hidden'
+                                                        }}
+                                                        title={isAllPaid ? "Enviar comprovante oficial" : "Enviar lembrete WhatsApp"}
+                                                    >
+                                                        <img src="/icons/whatsapp-icon.png" alt="WhatsApp" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                    </button>
                                                 </div>
+
                                             </div>
                                         )
                                     })}
