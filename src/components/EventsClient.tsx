@@ -155,19 +155,24 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
               if (event.beer_price_brahma > 0) availableBeers.push({ id: 'brahma', name: 'BRAHMA', price: event.beer_price_brahma })
               if (event.beer_price_antarctica > 0) availableBeers.push({ id: 'antarctica', name: 'ANTARCTICA', price: event.beer_price_antarctica })
 
-              const myBill = myAttendanceRecords.reduce((total: number, a: any) => {
+              const myUnpaidRecords = myAttendanceRecords.filter((a: any) => !a.is_paid)
+              const myUnpaidBill = myUnpaidRecords.reduce((total: number, a: any) => {
                   const beerPrice = availableBeers.find(b => b.id === a.selected_beer)?.price || 0
                   return total + event.price + beerPrice
               }, 0)
+              const isMyGroupFullyPaid = myAttendanceRecords.length > 0 && myAttendanceRecords.every((a: any) => a.is_paid)
 
               // Group by User for the Organizer
-              const groupedAttendees: Record<string, { profile: any, records: any[], total: number }> = {}
+              const groupedAttendees: Record<string, { profile: any, records: any[], totalPending: number }> = {}
               event.attendees?.forEach((a: any) => {
-                  if (!groupedAttendees[a.user_id]) groupedAttendees[a.user_id] = { profile: a.profiles, records: [], total: 0 }
+                  if (!groupedAttendees[a.user_id]) groupedAttendees[a.user_id] = { profile: a.profiles, records: [], totalPending: 0 }
                   groupedAttendees[a.user_id].records.push(a)
-                  const bp = availableBeers.find(b => b.id === a.selected_beer)?.price || 0
-                  groupedAttendees[a.user_id].total += (event.price + bp)
+                  if (!a.is_paid) {
+                      const bp = availableBeers.find(b => b.id === a.selected_beer)?.price || 0
+                      groupedAttendees[a.user_id].totalPending += (event.price + bp)
+                  }
               })
+
 
               return (
                 <motion.div layout key={event.id} className="card" style={{ padding: '3rem', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 350px', gap: '4rem' }}>
@@ -225,17 +230,17 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                         return (
                                             <div key={`${event.id}-${attendeeUserId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--surface-container-high)', borderRadius: '4px' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                                    <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden' }}>
-                                                        {group.profile.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%' }} />}
+                                                    <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden', flexShrink: 0 }}>
+                                                        {group.profile.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
                                                     </div>
                                                     <div>
                                                         <p style={{ fontWeight: 900, fontSize: '0.9rem' }}>{group.profile.full_name}</p>
-                                                        <p style={{ fontSize: '0.75rem', color: isAllPaid ? '#81C784' : '#E57373' }}>
-                                                            {isAllPaid ? 'QUITADO' : `PENDENTE: R$ ${group.total.toFixed(2)}`}
+                                                        <p style={{ fontSize: '0.75rem', fontWeight: 600, color: group.totalPending > 0 ? '#E57373' : '#81C784' }}>
+                                                            {group.totalPending > 0 ? `PENDENTE: R$ ${group.totalPending.toFixed(2)}` : 'SITUAÇÃO: PAGO'}
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                                                     <button 
                                                         onClick={() => handleTogglePayment(attendeeUserId, !isAllPaid, event, group.profile, group.records)}
                                                         style={{ 
@@ -250,11 +255,11 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                             minWidth: '80px'
                                                         }}
                                                     >
-                                                        {isAllPaid ? 'PAGO ✓' : 'PAGO'}
+                                                        {isAllPaid ? 'PAGO ✓' : 'QUITAR'}
                                                     </button>
 
                                                     <button 
-                                                        onClick={() => sendWhatsAppMessage(event, group.profile, group.records, isAllPaid, group.total)}
+                                                        onClick={() => sendWhatsAppMessage(event, group.profile, group.records, isAllPaid, group.totalPending)}
                                                         className="btn-whatsapp"
                                                         style={{ 
                                                             background: isAllPaid ? '#4A90E2' : '#25D366', 
@@ -277,10 +282,10 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                         <img src="/icons/whatsapp-icon.png" alt="WhatsApp" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </button>
                                                 </div>
-
                                             </div>
                                         )
                                     })}
+
                                 </div>
                             </div>
                         )}
@@ -288,9 +293,28 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
 
                     {/* PERSONAL RSVP COLUMN */}
                     <div style={{ background: 'var(--surface-container-high)', padding: '2.5rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        {isConfirmed && (
+                            <div style={{ borderBottom: '1px solid var(--outline-variant)', paddingBottom: '1.5rem' }}>
+                                <p className="label" style={{ fontSize: '0.6rem', marginBottom: '1rem', opacity: 0.5 }}>SUA RESERVA & CONVIDADOS</p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    {myAttendanceRecords.map((r: any) => {
+                                        const bp = availableBeers.find(b => b.id === r.selected_beer)?.price || 0
+                                        return (
+                                            <div key={r.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
+                                                <span style={{ fontWeight: 600, opacity: r.is_paid ? 0.4 : 1 }}>{r.guest_name || 'VOCÊ'} <small style={{ fontWeight: 400, fontSize: '0.65rem' }}>({r.selected_beer.toUpperCase()})</small></span>
+                                                <span style={{ fontWeight: 900, color: r.is_paid ? '#81C784' : 'inherit', fontSize: '0.75rem' }}>{r.is_paid ? '✓ PAGO' : `R$ ${(event.price + bp).toFixed(2)}`}</span>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
                         <div>
-                             <p className="label" style={{ fontSize: '0.7rem', opacity: 0.5 }}>VALOR INDIVIDUAL</p>
-                             <h4 style={{ fontSize: '2.5rem', fontWeight: 900 }}>R$ {myBill.toFixed(2)}</h4>
+                             <p className="label" style={{ fontSize: '0.7rem', opacity: 0.5 }}>{isMyGroupFullyPaid ? 'SITUAÇÃO ATUAL' : 'VALOR A PAGAR'}</p>
+                             <h4 style={{ fontSize: '2.5rem', fontWeight: 900, color: isMyGroupFullyPaid ? '#81C784' : 'inherit' }}>
+                                {isMyGroupFullyPaid ? 'QUITADO' : `R$ ${myUnpaidBill.toFixed(2)}`}
+                             </h4>
                         </div>
 
                         {!userId ? (
@@ -305,29 +329,34 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                             </div>
                         ) : (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <div style={{ textAlign: 'center', padding: '1rem', background: 'var(--surface-container-low)', borderRadius: '4px' }}>
-                                     {myAttendanceRecords.every((r: any) => r.is_paid) ? (
-                                         <p style={{ color: '#81C784', fontWeight: 900, fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><CheckCircle2 size={16}/> SEU PAGAMENTO CONCLUÍDO</p>
-                                     ) : (
-                                         <p style={{ color: '#E57373', fontWeight: 900, fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><AlertCircle size={16}/> AGUARDANDO QUITAÇÃO</p>
-                                     )}
-                                </div>
+                                {!isMyGroupFullyPaid && (
+                                    <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(229, 115, 115, 0.1)', borderRadius: '4px', border: '1px solid rgba(229, 115, 115, 0.2)' }}>
+                                         <p style={{ color: '#E57373', fontWeight: 900, fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                                            <AlertCircle size={16}/> AGUARDANDO QUITAÇÃO
+                                         </p>
+                                    </div>
+                                )}
+                                
                                 <button onClick={() => setGuestInputs({...guestInputs, [event.id]: { name: '', beer: 'nenhuma', isAdding: true }})} className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)' }}>+ CONVIDADO</button>
                                 
                                 {guestInputs[event.id]?.isAdding && (
                                     <div style={{ padding: '1rem', background: 'var(--surface-container-low)', borderRadius: '4px', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                        <input className="input-field" placeholder="Nome" value={guestInputs[event.id].name} onChange={(e) => setGuestInputs({...guestInputs, [event.id]: {...guestInputs[event.id], name: e.target.value}})} />
+                                        <input className="input-field" placeholder="Nome do Convidado" value={guestInputs[event.id].name} onChange={(e) => setGuestInputs({...guestInputs, [event.id]: {...guestInputs[event.id], name: e.target.value}})} />
                                         <select className="input-field" value={guestInputs[event.id].beer} onChange={(e) => setGuestInputs({...guestInputs, [event.id]: {...guestInputs[event.id], beer: e.target.value}})}>
                                             <option value="nenhuma">SEM BEBIDA</option>
                                             {availableBeers.map(b => <option key={b.id} value={b.id}>{b.name.toUpperCase()}</option>)}
                                         </select>
-                                        <button onClick={() => handleJoin(event.id, guestInputs[event.id].name, guestInputs[event.id].beer)} className="btn-primary" style={{ fontSize: '0.7rem' }}>ADICIONAR</button>
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <button onClick={() => handleJoin(event.id, guestInputs[event.id].name, guestInputs[event.id].beer)} className="btn-primary" style={{ fontSize: '0.7rem', flex: 1 }}>ADICIONAR</button>
+                                            <button onClick={() => setGuestInputs({...guestInputs, [event.id]: { name: '', beer: 'nenhuma', isAdding: false }})} className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--outline)', color: 'inherit', padding: '0.5rem', width: '40px' }}><X size={16}/></button>
+                                        </div>
                                     </div>
                                 )}
                             </div>
                         )}
                     </div>
                 </motion.div>
+
               )
         })}
       </div>

@@ -46,6 +46,18 @@ export async function joinEvent(eventId: string, userId: string, beer: string = 
   const supabase = createClient()
   if (!userId) return { success: false, error: 'Usuário não identificado.' }
 
+  if (!guestName) {
+    // Check if user already joined as self
+    const { data: existing } = await supabase
+      .from('event_attendees')
+      .select('id')
+      .match({ event_id: eventId, user_id: userId })
+      .is('guest_name', null)
+      .maybeSingle()
+
+    if (existing) return { success: false, error: 'Você já está confirmado neste evento.' }
+  }
+
   const data: any = { event_id: eventId, user_id: userId, selected_beer: beer }
   if (guestName) data.guest_name = guestName
 
@@ -61,6 +73,7 @@ export async function joinEvent(eventId: string, userId: string, beer: string = 
   revalidatePath('/eventos')
   return { success: true }
 }
+
 
 export async function leaveEvent(attendanceId: string, userId: string) {
   const supabase = createClient()
