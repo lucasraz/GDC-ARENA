@@ -431,18 +431,18 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                 {userId === event.author_id && (
                                     <div style={{ borderTop: '1px solid var(--outline-variant)', paddingTop: '2rem' }}>
                                         <h4 style={{ fontSize: '0.75rem', fontWeight: 900, marginBottom: '1.25rem', opacity: 0.6 }}>CONTROLE DE QUITAÇÃO</h4>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                                             {Object.entries(groupedAttendees).map(([attendeeUserId, group]: [string, any]) => {
                                                 const isAllPaid = group.records.every((r: any) => r.is_paid)
                                                 return (
-                                                    <div key={`${event.id}-${attendeeUserId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.85rem', background: 'var(--surface-container-high)', borderRadius: '4px', gap: '1rem', flexWrap: 'wrap' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: '150px' }}>
-                                                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden', flexShrink: 0 }}>
+                                                    <div key={`${event.id}-${attendeeUserId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.4rem 0.75rem', background: 'var(--surface-container-high)', borderRadius: '4px', gap: '1rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0, flex: 1 }}>
+                                                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden', flexShrink: 0 }}>
                                                                 {group.profile.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
                                                             </div>
                                                             <div style={{ minWidth: 0 }}>
-                                                                <p style={{ fontWeight: 900, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{group.profile.full_name}</p>
-                                                                <p style={{ fontSize: '0.7rem', fontWeight: 600, color: group.totalPending > 0 ? '#E57373' : '#81C784' }}>
+                                                                <p style={{ fontWeight: 900, fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{group.profile.full_name}</p>
+                                                                <p style={{ fontSize: '0.65rem', fontWeight: 600, color: group.totalPending > 0 ? '#E57373' : '#81C784' }}>
                                                                     {group.totalPending > 0 ? `R$ ${group.totalPending.toFixed(2)}` : 'PAGO ✓'}
                                                                 </p>
                                                             </div>
