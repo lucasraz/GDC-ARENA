@@ -13,16 +13,35 @@ export default function MobileNavigation({ userLoggedIn }: MobileNavigationProps
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="mobile-only">
+    <div className="mobile-only" style={{ position: 'relative', zIndex: 10000, width: '40px', flexShrink: 0 }}>
       <button 
-        onClick={() => setIsOpen(!isOpen)}
-        style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0.5rem', display: 'flex', alignItems: 'center' }}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
+        style={{ 
+          background: 'transparent', 
+          border: 'none', 
+          color: 'white', 
+          cursor: 'pointer', 
+          padding: '1rem', 
+          margin: '-1rem',
+          display: 'flex', 
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          zIndex: 10001
+        }}
+        aria-label="Menu"
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={28} style={{ pointerEvents: 'none' }} /> : <Menu size={28} style={{ pointerEvents: 'none' }} />}
       </button>
 
       {isOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 2000 }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 10002 }}>
+
+
           <div 
             onClick={() => setIsOpen(false)} 
             style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)' }}

@@ -25,13 +25,13 @@ export default async function Header() {
         
         <MobileNavigation userLoggedIn={!!user} />
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'min(1.5rem, 3vw)', minWidth: 0 }}>
-          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'min(1.2rem, 3vw)', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'min(1.5rem, 4vw)', minWidth: 0 }}>
+          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'min(1.2rem, 4vw)', minWidth: 0 }}>
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={85} 
-              height={85} 
+              width={100} 
+              height={100} 
               className="desktop-only"
               style={{ borderRadius: '4px' }}
             />
@@ -39,29 +39,30 @@ export default async function Header() {
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={32} 
-              height={32} 
+              width={56} 
+              height={56} 
               className="mobile-only"
               style={{ borderRadius: '4px', flexShrink: 0 }}
             />
 
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', minWidth: 0 }}>
-                <h2 className="shimmer-text" style={{ fontSize: 'clamp(0.7rem, 3vw, 1.25rem)', letterSpacing: '-0.025em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>GDC ARENA</h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', minWidth: 0 }}>
+                <h2 className="shimmer-text" style={{ fontSize: 'clamp(1.1rem, 5vw, 1.7rem)', letterSpacing: '-0.02em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap' }}>GDC ARENA</h2>
                 <img 
                   src="/vasco-logo.png" 
                   alt="Vasco" 
                   style={{ 
-                    height: 'clamp(18px, 4.5vw, 28px)', 
-                    marginLeft: '2px',
+                    height: 'clamp(24px, 7vw, 38px)', 
+                    marginLeft: '2.5px',
                     flexShrink: 0,
-                    filter: 'drop-shadow(0px 0px 6px rgba(255,255,255,0.3)) drop-shadow(0px 4px 10px rgba(255,255,255,0.15))'
+                    filter: 'drop-shadow(0px 0px 8px rgba(255,255,255,0.4))'
                   }} 
                 />
               </div>
             </div>
           </Link>
         </div>
+
 
         <div className="desktop-only">
           <HeaderLinks userLoggedIn={!!user} />

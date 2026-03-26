@@ -11,20 +11,19 @@ export default function NoticiasPage() {
       
       <section className="section-container" style={{ borderBottom: '4px double var(--outline-variant)', marginBottom: '2rem', paddingBottom: '1rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '2rem' }}>
-            <h1 className="shimmer-text" style={{ fontSize: 'clamp(3rem, 10vw, 5rem)', fontWeight: 900, letterSpacing: '-0.04em' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'clamp(1rem, 4vw, 2.5rem)', marginBottom: '2rem', flexWrap: 'nowrap' }}>
+            <h1 className="shimmer-text" style={{ fontSize: 'clamp(1.8rem, 8.5vw, 5rem)', fontWeight: 900, letterSpacing: '-0.04em', whiteSpace: 'nowrap' }}>
               GDC ARENA
             </h1>
             <img 
               src="/vasco-logo.png" 
               alt="Vasco" 
               style={{ 
-                height: 'clamp(60px, 12vw, 120px)', 
+                height: 'clamp(40px, 12vw, 120px)', 
+                flexShrink: 0,
                 filter: 'drop-shadow(0px 0px 15px rgba(255,255,255,0.25)) drop-shadow(0px 10px 40px rgba(255,255,255,0.15))'
               }} 
             />
-
-
           </div>
 
 
