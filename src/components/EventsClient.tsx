@@ -60,10 +60,10 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
   const sendReminder = (event: any, hostProfile: any, amount: number) => {
       // Handle both object and array response from Supabase
       const profileData = Array.isArray(hostProfile) ? hostProfile[0] : hostProfile
-      const phone = profileData?.phone
+      const phone = profileData?.whatsapp || profileData?.phone
       
       if (!phone) {
-          alert(`Telefone não encontrado para ${profileData?.full_name || 'este usuário'}. Verifique se ele preencheu o campo no perfil.`)
+          alert(`Telefone/WhatsApp não encontrado para ${profileData?.full_name || 'este usuário'}. Verifique se ele preencheu o campo no perfil.`)
           return
       }
       const msg = `Olá ${profileData.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`

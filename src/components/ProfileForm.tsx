@@ -130,7 +130,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
           <div>
-            <label className="input-label">WHATSAPP</label>
+            <label className="input-label">TELEFONE / WHATSAPP</label>
             <input 
               type="text" 
               className="input-field"
@@ -140,6 +140,7 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
               required
             />
           </div>
+
           <div>
             <label className="input-label">GDC-ID (USERNAME)</label>
             <input 

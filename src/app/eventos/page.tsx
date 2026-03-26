@@ -21,8 +21,9 @@ export default async function EventosPage() {
             selected_beer, 
             guest_name,
             is_paid,
-            profiles(full_name, avatar_url, phone)
+            profiles(full_name, avatar_url, whatsapp)
         )
+
     `)
     .order('event_time', { ascending: true })
 
