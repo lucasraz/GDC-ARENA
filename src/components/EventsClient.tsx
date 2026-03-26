@@ -238,9 +238,6 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', flexShrink: 0 }}>
                                     <MessageCircle size={14} /> <span>{event.comments?.length || 0}</span>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 900, color: 'var(--primary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                                    <DollarSign size={14} /> <span>R$ {event.price.toFixed(2)}</span>
-                                </div>
                             </div>
                          </div>
                          
@@ -275,12 +272,6 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                     {/* Title & Stats Summary for Collapsed State */}
                     <div style={{ minWidth: 0 }}>
                         <h3 style={{ fontSize: isExpanded ? 'clamp(1.5rem, 6vw, 2.5rem)' : '1.35rem', fontWeight: 900, marginBottom: '0.25rem', transition: 'all 0.3s ease', letterSpacing: '-0.02em' }}>{event.title}</h3>
-                        {!isExpanded && (
-                            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.75rem', fontWeight: 700, opacity: 0.5 }}>
-                                <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}><MapPin size={12} /> {event.location}</div>
-                                <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}><Clock size={12} /> {new Date(event.event_time).toLocaleDateString('pt-BR')}</div>
-                            </div>
-                        )}
                         <div style={{ height: isExpanded ? 'auto' : '0', overflow: 'hidden', opacity: 0.7, fontSize: '0.9rem', transition: 'all 0.3s ease', marginTop: isExpanded ? '0.5rem' : '0' }}>
                             {event.description}
                         </div>
@@ -289,7 +280,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                     <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem', fontWeight: 700, flexWrap: 'wrap', opacity: isExpanded ? 1 : 0.6 }}>
                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><MapPin size={14} /> {event.location}</div>
                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {new Date(event.event_time).toLocaleString('pt-BR')}</div>
-                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}><DollarSign size={14} /> VALOR: R$ {event.price.toFixed(2)} (SEM BEBIDA)</div>
+                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>VALOR: R$ {event.price.toFixed(2)} (SEM BEBIDA)</div>
                     </div>
 
                     <AnimatePresence>
