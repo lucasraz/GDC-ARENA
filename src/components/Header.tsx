@@ -28,9 +28,10 @@ export default async function Header() {
             />
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <h2 style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900, lineHeight: 1 }}>GDC ARENA</h2>
+              <h2 className="shimmer-text" style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900, lineHeight: 1 }}>GDC ARENA</h2>
               <p style={{ fontSize: '0.65rem', opacity: 0.6, fontWeight: 700, letterSpacing: '0.05em', marginTop: '0.2rem' }}>GIGANTES DA CERVA</p>
             </div>
+
           </Link>
 
           <a 
