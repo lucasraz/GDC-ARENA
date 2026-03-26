@@ -289,6 +289,7 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                     <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem', fontWeight: 700, flexWrap: 'wrap', opacity: isExpanded ? 1 : 0.6 }}>
                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><MapPin size={14} /> {event.location}</div>
                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {new Date(event.event_time).toLocaleString('pt-BR')}</div>
+                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}><DollarSign size={14} /> VALOR: R$ {event.price.toFixed(2)} (SEM BEBIDA)</div>
                     </div>
 
                     <AnimatePresence>
