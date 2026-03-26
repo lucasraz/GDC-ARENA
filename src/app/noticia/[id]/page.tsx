@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import noticiasData from '@/data/noticias.json'
+import ShareButtons from '@/components/ShareButtons'
 
 export default async function NoticiaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -14,17 +15,24 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
     <main className="min-h-screen">
       <section className="section-container" style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
         <article style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <header style={{ marginBottom: '3rem' }}>
-            <span className="label" style={{ color: 'var(--primary)', opacity: 0.8, display: 'block', marginBottom: '1rem' }}>
-                {noticia.category} • {noticia.date}
-            </span>
-            <h1 style={{ fontSize: '3.5rem', marginBottom: '2rem' }}>{noticia.title}</h1>
-            <p style={{ fontSize: '1.25rem', opacity: 0.7, fontStyle: 'italic', borderLeft: '4px solid var(--primary)', paddingLeft: '1.5rem', marginBottom: '2rem' }}>
+          <header style={{ marginBottom: '3rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div>
+                <span className="label" style={{ color: 'var(--primary)', opacity: 0.8, display: 'block', marginBottom: '1rem' }}>
+                    {noticia.category} • {noticia.date}
+                </span>
+                <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 3.5rem)', marginBottom: '1.5rem', fontWeight: 900, lineHeight: 1.1 }}>{noticia.title}</h1>
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
+                <ShareButtons title={noticia.title} text={noticia.excerpt} />
+            </div>
+
+            <p style={{ fontSize: '1.25rem', opacity: 0.7, fontStyle: 'italic', borderLeft: '4px solid var(--primary)', paddingLeft: '1.5rem' }}>
                 {noticia.excerpt}
             </p>
           </header>
 
-          <div style={{ position: 'relative', width: '100%', height: '400px', marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden' }}>
+          <div style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vw, 500px)', marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden' }}>
             <Image 
               src={noticia.image_url} 
               alt={noticia.title} 

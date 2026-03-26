@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import CommentsSection from '../../../components/CommentsSection'
+import ShareButtons from '@/components/ShareButtons'
 
 export default async function CronicaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -34,9 +35,13 @@ export default async function CronicaPage({ params }: { params: Promise<{ id: st
 
         {/* Content */}
         <article>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: 900, lineHeight: 1, marginBottom: '2.5rem', letterSpacing: '-0.03em' }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: 900, lineHeight: 1, marginBottom: '2rem', letterSpacing: '-0.03em' }}>
                 {cronica.title}
             </h1>
+
+            <div style={{ marginBottom: '2.5rem' }}>
+                <ShareButtons title={cronica.title} text={cronica.content.substring(0, 100) + '...'} />
+            </div>
             
             <div style={{ fontSize: '1.25rem', lineHeight: 1.8, opacity: 0.9, whiteSpace: 'pre-wrap' }}>
                 {cronica.content}
