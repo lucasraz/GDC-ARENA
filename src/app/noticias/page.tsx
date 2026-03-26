@@ -15,7 +15,7 @@ export default function NoticiasPage() {
             GDC ARENA
           </h1>
           <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--outline-variant)', borderBottom: '1px solid var(--outline-variant)', padding: '0.5rem 0', marginTop: '1rem' }}>
-            <span className="label" style={{ fontSize: '0.75rem' }}>EDICÃO Nº 001</span>
+            <span className="label" style={{ fontSize: '0.75rem' }}>O PORTO SEGURO DO GIGANTE</span>
             <span className="label" style={{ fontSize: '0.75rem' }}>26 DE MARÇO DE 2026</span>
           </div>
         </div>
