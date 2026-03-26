@@ -25,8 +25,8 @@ export default async function Header() {
         
         <MobileNavigation userLoggedIn={!!user} />
 
-        <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1 }}>
-          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'min(0.8rem, 3vw)', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1, justifyContent: 'center' }}>
+          <Link href="/noticias" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 3vw, 1.25rem)', minWidth: 0 }}>
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
@@ -39,20 +39,19 @@ export default async function Header() {
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={42} 
-              height={42} 
+              width={44} 
+              height={44} 
               className="mobile-only"
               style={{ borderRadius: '4px', flexShrink: 0 }}
             />
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', minWidth: 0 }}>
-              <h2 className="shimmer-text" style={{ fontSize: 'clamp(0.9rem, 4.3vw, 1.5rem)', letterSpacing: '-0.02em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap' }}>GDC ARENA</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
+              <h2 className="shimmer-text" style={{ fontSize: 'clamp(0.95rem, 4.5vw, 1.6rem)', letterSpacing: '-0.02em', fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap' }}>GDC ARENA</h2>
               <img 
                 src="/vasco-logo.png" 
                 alt="Vasco" 
                 style={{ 
-                  height: 'clamp(20px, 6vw, 36px)', 
-                  marginLeft: '2px',
+                  height: 'clamp(24px, 6.5vw, 38px)', 
                   flexShrink: 0,
                   filter: 'drop-shadow(0px 0px 8px rgba(255,255,255,0.4))'
                 }} 
@@ -60,6 +59,7 @@ export default async function Header() {
             </div>
           </Link>
         </div>
+
 
 
         <div className="desktop-only">
