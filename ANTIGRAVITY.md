@@ -69,9 +69,11 @@ GDC-ARENA/
   - `.mobile-only`: `display: none` above 768px.
 - **Tactical Scaling**: Elements in `TacticalField.tsx` use `.tactical-shield` (56px desktop / 38px mobile) and `.tactical-label` classes for unified responsive behavior.
 - **Mobile Navigation**: Replaced bottom navigation with a top-level **Drawer Menu** (`MobileNavigation.tsx`) for a cleaner, functional "Premium" look.
+- **Global Interaction**: Implemented `-webkit-tap-highlight-color: transparent` to eliminate browser-default click artifacts (green squares) on mobile.
 
 ### 🚀 Deployment & Environment
 - **Platform**: Vercel (Production ready).
+- **Checkpoint**: `checkpoint-mobile-v1` (Stable Mobile Optimization).
 - **Mandatory Environment Variables**:
   - `NEXT_PUBLIC_SUPABASE_URL`
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
@@ -81,7 +83,10 @@ GDC-ARENA/
 - `Header.tsx`: Server Component for global data.
 - `MobileNavigation.tsx`: Client Drawer for mobile links.
 - `TacticalField.tsx`: Responsive 4-3-3 soccer field visualization.
-- `ProfileForm.tsx`: User settings with display name preference.
+- `ShareButtons.tsx`: Unified broadcasting component for News, Chronicles, and Events (Web Share API + WhatsApp).
+- `EventsClient.tsx`: Features expandable cards and integrated tactical discussions (Comments).
+- `EventCommentsSection.tsx`: Real-time community engagement for match events.
+- `Footer.tsx`: Integrated Official Instagram link with premium SVG branding.
 
 ### 📅 Next Steps
 1. **Tenant Orchestration**: Finalize dynamic tenant discovery.
@@ -99,6 +104,9 @@ GDC-ARENA/
 - [x] Visual Tactical Field (4-3-3) with real Club Crests (Brasões).
 - [x] Simplified Elite Command (Original Tactical 4-3-3).
 - [x] Financial Orchestration (Payment Status, Bulk Quitação, RLS Master Key).
+- [x] Community Engagement (Event Comments & Tactical Discussions).
+- [x] Content Broadcasting (Share System for News/Cronicas/Events).
+- [x] Mobile Polish (Clean Cartola UI, Instagram Footer, No Click Artifacts).
 - [ ] Implement Tenant Discovery/Creation logic (for new users).
 
 ## 💰 Financial Orchestration Rules (Layer 2)
