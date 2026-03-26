@@ -69,10 +69,11 @@ export default async function Header() {
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           {user && profile ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: '1rem', paddingLeft: '1.5rem', borderLeft: '1px solid var(--outline-variant)' }}>
-              <div style={{ textAlign: 'right' }}>
+              <div style={{ textAlign: 'center' }}>
                  <p style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '0.1rem' }}>BEM-VINDO(A)</p>
                  <p style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase' }}>{profile.full_name?.split(' ')[0] || 'NAVEGADOR'}</p>
               </div>
+
               <a href="/profile" style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--primary)', background: 'var(--surface)' }}>
                 {profile.avatar_url ? (
                   <img src={profile.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
