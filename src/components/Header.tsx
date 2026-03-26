@@ -22,10 +22,11 @@ export default async function Header() {
             <Image 
               src="/logo.png" 
               alt="GDC ARENA Logo" 
-              width={60} 
-              height={60} 
+              width={85} 
+              height={85} 
               style={{ borderRadius: '4px' }}
             />
+
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h2 style={{ fontSize: '1.25rem', letterSpacing: '0', fontWeight: 900, lineHeight: 1 }}>GDC ARENA</h2>
               <p style={{ fontSize: '0.65rem', opacity: 0.6, fontWeight: 700, letterSpacing: '0.05em', marginTop: '0.2rem' }}>GIGANTES DA CERVA</p>
