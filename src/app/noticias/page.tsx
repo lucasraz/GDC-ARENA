@@ -11,9 +11,21 @@ export default function NoticiasPage() {
       
       <section className="section-container" style={{ borderBottom: '4px double var(--outline-variant)', marginBottom: '2rem', paddingBottom: '1rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 className="shimmer-text" style={{ fontSize: 'clamp(3rem, 10vw, 5rem)', fontWeight: 900, letterSpacing: '-0.04em', marginBottom: '2rem' }}>
-            GDC ARENA
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '2rem' }}>
+            <h1 className="shimmer-text" style={{ fontSize: 'clamp(3rem, 10vw, 5rem)', fontWeight: 900, letterSpacing: '-0.04em' }}>
+              GDC ARENA
+            </h1>
+            <img 
+              src="/vasco-logo.png" 
+              alt="Vasco" 
+              style={{ 
+                height: 'clamp(60px, 12vw, 100px)', 
+                filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))',
+                transform: 'rotate(-5deg)'
+              }} 
+            />
+          </div>
+
 
           <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--outline-variant)', borderBottom: '1px solid var(--outline-variant)', padding: '0.5rem 0', marginTop: '1rem' }}>
             <span className="label" style={{ fontSize: '0.75rem' }}>O PORTO SEGURO DO GIGANTE</span>
