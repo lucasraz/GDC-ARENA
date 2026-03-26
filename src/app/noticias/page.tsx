@@ -20,9 +20,10 @@ export default function NoticiasPage() {
               alt="Vasco" 
               style={{ 
                 height: 'clamp(60px, 12vw, 120px)', 
-                filter: 'drop-shadow(0px 4px 4px rgba(0,0,0,0.4)) drop-shadow(0px 10px 20px rgba(0,0,0,1))'
+                filter: 'drop-shadow(0px 0px 15px rgba(255,255,255,0.25)) drop-shadow(0px 10px 40px rgba(255,255,255,0.15))'
               }} 
             />
+
 
           </div>
 

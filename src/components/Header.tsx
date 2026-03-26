@@ -35,7 +35,7 @@ export default async function Header() {
                   alt="Vasco" 
                   style={{ 
                     height: '32px', 
-                    filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) drop-shadow(0px 6px 12px rgba(0,0,0,0.8))'
+                    filter: 'drop-shadow(0px 0px 6px rgba(255,255,255,0.3)) drop-shadow(0px 4px 10px rgba(255,255,255,0.15))'
                   }} 
                 />
 
