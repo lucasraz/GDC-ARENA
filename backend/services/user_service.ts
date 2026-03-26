@@ -45,11 +45,11 @@ export class UserService {
       avatar_url: avatar_url || existing?.avatar_url || '',
       full_name: data.full_name || existing?.full_name || '',
       username: data.username || existing?.username || '',
-      nickname: data.nickname || existing?.nickname || '',
       display_name_preference: data.display_name_preference || existing?.display_name_preference || 'full_name',
       birth_date: data.birth_date || existing?.birth_date || '',
       whatsapp: data.whatsapp || existing?.whatsapp || '',
       membership_type: data.membership_type || existing?.membership_type || 'nenhum',
+
     }
 
 

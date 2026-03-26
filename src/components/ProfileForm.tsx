@@ -7,13 +7,13 @@ interface ProfileFormProps {
   initialData?: {
     full_name: string
     username: string
-    nickname?: string
-    display_name_preference?: 'full_name' | 'nickname'
+    display_name_preference?: 'full_name' | 'username'
     avatar_url?: string
     birth_date?: string
     whatsapp?: string
     membership_type?: string
   }
+
   onSubmit: (formData: FormData) => Promise<{ success: boolean, message?: string }>
 }
 
@@ -21,7 +21,6 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
   const [formData, setFormData] = useState({
     full_name: initialData?.full_name || '',
     username: initialData?.username || '',
-    nickname: initialData?.nickname || '',
     display_name_preference: initialData?.display_name_preference || 'full_name',
     birth_date: initialData?.birth_date || '',
     whatsapp: initialData?.whatsapp || '',
@@ -48,7 +47,6 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
       const data = new FormData()
       data.append('full_name', formData.full_name)
       data.append('username', formData.username)
-      data.append('nickname', formData.nickname)
       data.append('display_name_preference', formData.display_name_preference)
       data.append('birth_date', formData.birth_date)
       data.append('whatsapp', formData.whatsapp)
@@ -136,13 +134,14 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
           <div>
-            <label className="input-label">COMO QUER SER CHAMADO? (APELIDO)</label>
+            <label className="input-label">APELIDO (GDC-ID)</label>
             <input 
               type="text" 
               className="input-field"
-              value={formData.nickname}
-              onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               placeholder="Ex: O Brabo"
+              required
             />
           </div>
           <div>
@@ -153,8 +152,8 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
               onChange={(e) => setFormData({ ...formData, display_name_preference: e.target.value as any })}
               style={{ width: '100%', appearance: 'none' }}
             >
-              <option value="full_name">NOME REAL</option>
-              <option value="nickname">APELIDO GDC</option>
+              <option value="full_name">EXIBIR MEU NOME</option>
+              <option value="username">EXIBIR MEU APELIDO GDC</option>
             </select>
           </div>
         </div>
@@ -173,30 +172,18 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
           </div>
 
           <div>
-            <label className="input-label">GDC-ID (USERNAME)</label>
-            <input 
-              type="text" 
-              className="input-field"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              placeholder="ex-vasco-1898"
-              required
-            />
+             <label className="input-label">MODALIDADE DE AFILIAÇÃO</label>
+             <select 
+               className="input-field"
+               value={formData.membership_type}
+               onChange={(e) => setFormData({ ...formData, membership_type: e.target.value as any })}
+               style={{ width: '100%', appearance: 'none' }}
+             >
+               <option value="nenhum">NÃO SOU SÓCIO</option>
+               <option value="socio_torcedor">SÓCIO TORCEDOR</option>
+               <option value="estatutario">SÓCIO ESTATUTÁRIO</option>
+             </select>
           </div>
-        </div>
-
-        <div>
-           <label className="input-label">MODALIDADE DE AFILIAÇÃO</label>
-           <select 
-             className="input-field"
-             value={formData.membership_type}
-             onChange={(e) => setFormData({ ...formData, membership_type: e.target.value as any })}
-             style={{ width: '100%', appearance: 'none' }}
-           >
-             <option value="nenhum">NÃO SOU SÓCIO</option>
-             <option value="socio_torcedor">SÓCIO TORCEDOR</option>
-             <option value="estatutario">SÓCIO ESTATUTÁRIO</option>
-           </select>
         </div>
 
         {message && (
@@ -242,4 +229,5 @@ export default function ProfileForm({ initialData, onSubmit }: ProfileFormProps)
     </motion.div>
   )
 }
+
 

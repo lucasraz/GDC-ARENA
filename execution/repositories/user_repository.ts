@@ -5,13 +5,13 @@ export interface UserProfile {
   tenant_id: string
   full_name: string
   username: string
-  nickname?: string
-  display_name_preference?: 'full_name' | 'nickname'
+  display_name_preference?: 'full_name' | 'username'
   avatar_url?: string
   birth_date?: string
   whatsapp?: string
   membership_type?: 'socio_torcedor' | 'estatutario' | 'nenhum'
 }
+
 
 
 export const userRepository = {

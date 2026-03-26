@@ -14,9 +14,10 @@ export default async function Header() {
   
   const profile = user ? await userRepository.findById(user.id, TENANT_ID) : null
 
-  const displayName = profile?.display_name_preference === 'nickname' && profile?.nickname 
-    ? profile.nickname 
+  const displayName = profile?.display_name_preference === 'username' && profile?.username 
+    ? profile.username 
     : profile?.full_name?.split(' ')[0] || 'NAVEGADOR'
+
 
   return (
     <nav className="glass-nav">
