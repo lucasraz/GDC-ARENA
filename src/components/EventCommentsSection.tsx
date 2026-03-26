@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Trash2, MessageCircle, Send } from 'lucide-react'
 import { addEventComment, deleteEventComment } from '@/app/actions/event_actions'
@@ -30,6 +30,10 @@ export default function EventCommentsSection({ eventId, currentUserId, initialCo
   const [newComment, setNewComment] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isDeleting, setIsDeleting] = useState<string | null>(null)
+  // Sync state with props when initialComments changes (RSC refresh)
+  useEffect(() => {
+    setComments(initialComments || [])
+  }, [initialComments])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,6 +43,10 @@ export default function EventCommentsSection({ eventId, currentUserId, initialCo
     const result = await addEventComment(currentUserId, eventId, newComment)
     if (result.success) {
       setNewComment('')
+      // Update local state immediately if we have the data
+      if (result.data) {
+        setComments(prev => [result.data as EventComment, ...prev])
+      }
       router.refresh()
     }
     setIsSubmitting(false)
