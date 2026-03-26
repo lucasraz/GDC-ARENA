@@ -40,22 +40,24 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
     }
   }
 
-  const handleTogglePayment = async (attendanceId: string, isPaid: boolean, event: any, hostProfile: any, personalRecords: any[]) => {
-    const result = await togglePaymentStatus(attendanceId, isPaid, userId)
+  const handleTogglePayment = async (attendeeUserId: string, isPaid: boolean, event: any, hostProfile: any, personalRecords: any[]) => {
+    const result = await togglePaymentStatus(event.id, attendeeUserId, isPaid, userId)
     if (result.success) {
       if (isPaid) {
           // Send Confirmation WhatsApp
-          const phone = hostProfile?.phone
+          const profileData = Array.isArray(hostProfile) ? hostProfile[0] : hostProfile
+          const phone = profileData?.whatsapp || profileData?.phone
           if (phone) {
               const guestList = personalRecords.filter(r => r.guest_name).map(r => r.guest_name).join(', ') || 'Apenas você'
-              const beersList = personalRecords.map(r => r.selected_beer.toUpperCase()).join(', ')
-              const msg = `Olá ${hostProfile.full_name}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
+              const beersList = [...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')
+              const msg = `Olá ${profileData.full_name}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
               window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank')
           }
       }
       router.refresh()
     }
   }
+
 
   const sendReminder = (event: any, hostProfile: any, amount: number) => {
       // Handle both object and array response from Supabase
@@ -234,11 +236,22 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                 </div>
                                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                                     <button 
-                                                        onClick={() => group.records.forEach((r: any) => handleTogglePayment(r.id, !isAllPaid, event, group.profile, group.records))}
-                                                        style={{ background: isAllPaid ? 'transparent' : 'var(--primary)', border: isAllPaid ? '1px solid var(--primary)' : 'none', color: isAllPaid ? 'var(--primary)' : 'black', padding: '0.5rem 1rem', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 900, cursor: 'pointer' }}
+                                                        onClick={() => handleTogglePayment(attendeeUserId, !isAllPaid, event, group.profile, group.records)}
+                                                        style={{ 
+                                                            background: isAllPaid ? 'transparent' : 'var(--primary)', 
+                                                            border: isAllPaid ? '1px solid var(--primary)' : 'none', 
+                                                            color: isAllPaid ? 'var(--primary)' : 'black', 
+                                                            padding: '0.5rem 1.25rem', 
+                                                            borderRadius: '4px', 
+                                                            fontSize: '0.75rem', 
+                                                            fontWeight: 900, 
+                                                            cursor: 'pointer',
+                                                            minWidth: '100px'
+                                                        }}
                                                     >
-                                                        {isAllPaid ? 'ESTORNAR' : 'QUITAR'}
+                                                        {isAllPaid ? 'PAGO ✓' : 'DAR PAGO'}
                                                     </button>
+
                                                     {!isAllPaid && (
                                                         <button 
                                                             onClick={() => sendReminder(event, group.profile, group.total)}

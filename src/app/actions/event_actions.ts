@@ -80,20 +80,25 @@ export async function leaveEvent(attendanceId: string, userId: string) {
   return { success: true }
 }
 
-export async function togglePaymentStatus(attendanceId: string, isPaid: boolean, organizerId: string) {
+export async function togglePaymentStatus(eventId: string, userId: string, isPaid: boolean, organizerId: string) {
   const supabase = createClient()
   if (!organizerId) return { success: false, error: 'Usuário não identificado.' }
+
+  // Check if caller is the event author (organizer)
+  const { data: event } = await supabase.from('events').select('author_id').match({ id: eventId }).single()
+  if (event?.author_id !== organizerId) return { success: false, error: 'Apenas o organizador pode dar quitação.' }
 
   const { error } = await supabase
     .from('event_attendees')
     .update({ is_paid: isPaid })
-    .match({ id: attendanceId })
+    .match({ event_id: eventId, user_id: userId })
 
   if (error) {
     console.error('Error updating payment:', error)
-    return { success: false, error: `Erro ao atualizar pagamento: ${error.message}` }
+    return { success: false, error: `Erro ao atualizar: ${error.message}` }
   }
 
   revalidatePath('/eventos')
   return { success: true }
 }
+
