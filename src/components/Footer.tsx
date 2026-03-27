@@ -14,7 +14,7 @@ export default function Footer() {
           <h2 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '0.05em', opacity: 0.8 }}>GDC ARENA</h2>
           
           <a 
-            href="https://www.instagram.com/gigantes_da_cerva/" 
+            href="https://www.instagram.com/gigantesdacervaa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
             target="_blank" 
             rel="noopener noreferrer"
             style={{ 
