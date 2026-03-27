@@ -52,7 +52,11 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem' }}>
+    <form onSubmit={handleSubmit} style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', 
+      gap: 'clamp(1.5rem, 5vw, 3rem)' 
+    }}>
       
       {/* LEFT COLUMN: BASIC INFO */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -129,7 +133,14 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
       </div>
 
       {/* RIGHT COLUMN: BEVERAGES */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'var(--surface-container-low)', padding: '2rem', borderRadius: '4px' }}>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '1.5rem', 
+        background: 'var(--surface-container-low)', 
+        padding: 'clamp(1rem, 4vw, 2rem)', 
+        borderRadius: '4px' 
+      }}>
         <h4 style={{ fontSize: '0.9rem', fontWeight: 900, color: 'var(--primary)', marginBottom: '0.5rem' }}>SISTEMA DE CONSUMO</h4>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', padding: '1rem', border: '1px solid var(--outline-variant)', borderRadius: '4px' }}>
@@ -150,7 +161,7 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
                 <p style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: '0.5rem' }}>
                     Defina o valor de cada marca. Se o valor for 0, a marca não aparecerá para os convidados.
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.25rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <label className="label">HEINEKEN (R$)</label>
                         <input type="number" step="0.01" className="input-field" value={formData.beer_price_heineken} onChange={(e) => setFormData({ ...formData, beer_price_heineken: e.target.value })} />
@@ -178,7 +189,17 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
       </div>
 
       {/* FOOTER */}
-      <div style={{ gridColumn: '1 / -1', borderTop: '1px solid var(--outline-variant)', paddingTop: '2rem', display: 'flex', justifyContent: 'flex-end', gap: '1rem', alignItems: 'center' }}>
+      <div style={{ 
+        gridColumn: '1 / -1', 
+        borderTop: '1px solid var(--outline-variant)', 
+        paddingTop: '2rem', 
+        display: 'flex', 
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-end', 
+        gap: '1rem', 
+        alignItems: 'center' 
+      }}>
         {error && <span style={{ color: '#E57373', fontSize: '0.8rem' }}>{error}</span>}
         <button type="button" onClick={onCancel} style={{ background: 'transparent', border: 'none', color: 'inherit', fontWeight: 700, cursor: 'pointer', padding: '0 1rem' }}>CANCELAR</button>
         <button type="submit" className="btn-primary" disabled={isSubmitting} style={{ padding: '1rem 3rem' }}>
