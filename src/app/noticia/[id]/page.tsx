@@ -2,6 +2,40 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import noticiasData from '@/data/noticias.json'
 import ShareButtons from '@/components/ShareButtons'
+import type { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const noticia = (noticiasData as any[]).find(n => n.id === id)
+
+  if (!noticia) return {}
+
+  const imageUrl = noticia.image_url || noticia.image || '/noticias/default.jpg'
+
+  return {
+    title: `${noticia.title} | GDC ARENA`,
+    description: noticia.excerpt,
+    openGraph: {
+      title: noticia.title,
+      description: noticia.excerpt,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: noticia.title,
+        },
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: noticia.title,
+      description: noticia.excerpt,
+      images: [imageUrl],
+    },
+  }
+}
 
 export default async function NoticiaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

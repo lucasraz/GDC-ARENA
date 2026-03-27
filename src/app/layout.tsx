@@ -5,6 +5,17 @@ import { epilogue, newsreader, inter } from './fonts'
 export const metadata: Metadata = {
   title: 'GDC-ARENA | Nautical Editorial',
   description: 'O Gigante da Colina em sua forma definitiva.',
+  openGraph: {
+    title: 'GDC-ARENA | Nautical Editorial',
+    description: 'O Gigante da Colina em sua forma definitiva.',
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'GDC-ARENA | Nautical Editorial',
+    description: 'O Gigante da Colina em sua forma definitiva.',
+  },
 }
 
 import Header from '@/components/Header'
