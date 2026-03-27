@@ -18,11 +18,12 @@
 3. **Drafting Policy:** Use NotebookLM orchestration to verify real-time data before updating.
 4. **ID Uniqueness:** Every news item must have a unique readable ID based on its title.
 
-## 🛠️ Final Checkpoint: Mobile Stability (v1.2)
-- [x] **Client-Side Exception Fix**: Refactored `EventsClient` to avoid Hook violations.
-- [x] **Body Size Limit Fix**: Increased server actions limit to 10MB in `next.config.mjs`.
-- [x] **Defensive Rendering**: Added optional chaining and defaults for all event data.
-- [x] **News History**: Transitioned from overwrite to prepend stacking logic.
+## 🛠️ Final Checkpoint: Suporte Editorial & Segurança (v1.3)
+- [x] **GDC Content Manager**: App Python completo para gerir Notícias e Cartola.
+- [x] **Segurança Blindada**: Varredura Bandit (0 erros) e Auditoria NPM (Fix 22/36).
+- [x] **Arquitetura de Dados**: Suporte a rascunhos (drafts) do NotebookLM.
+- [x] **Layout Archive**: Notícias antigas agora possuem um "card próprio" (grid compacto).
+- [x] **Social**: Atualizado link oficial do Instagram no Rodapé.
 
 ## 🏛️ 3-Layer Micro-SaaS Architecture (directives/ orchestration/ execution/)
 Following strictly AGENTS_MSAAS.md instructions:
