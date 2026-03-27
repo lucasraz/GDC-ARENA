@@ -83,9 +83,9 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
       if (isPaid) {
           const guestList = personalRecords.filter(r => r.guest_name).map(r => r.guest_name).join(', ') || 'Apenas você'
           const beersList = [...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')
-          msg = `Olá ${profileData.full_name}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
+          msg = `Olá ${profileData?.full_name || 'Amigo'}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
       } else {
-          msg = `Olá ${profileData.full_name}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
+          msg = `Olá ${profileData?.full_name || 'Amigo'}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
       }
       
       window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank')
@@ -196,7 +196,8 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
 
               const handleShare = (e: React.MouseEvent) => {
                 e.stopPropagation();
-                const text = `Confira o evento: ${event.title} no GDC ARENA! 🏴‍☠️🚩\n📍 Local: ${event.location}\n📅 Data: ${new Date(event.event_time).toLocaleString('pt-BR')}`;
+                const eventDate = event.event_time ? new Date(event.event_time).toLocaleString('pt-BR') : 'Data não definida';
+                const text = `Confira o evento: ${event.title || 'Novo Evento'} no GDC ARENA! 🏴‍☠️🚩\n📍 Local: ${event.location || 'Local a definir'}\n📅 Data: ${eventDate}`;
                 const url = window.location.href;
                 
                 if (navigator.share) {
@@ -279,8 +280,8 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
 
                     <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem', fontWeight: 700, flexWrap: 'wrap', opacity: isExpanded ? 1 : 0.6 }}>
                         <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><MapPin size={14} /> {event.location}</div>
-                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {new Date(event.event_time).toLocaleString('pt-BR')}</div>
-                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>VALOR: R$ {event.price.toFixed(2)} (SEM BEBIDA)</div>
+                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {event.event_time ? new Date(event.event_time).toLocaleString('pt-BR') : 'Data a definir'}</div>
+                        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>VALOR: R$ {(event.price || 0).toFixed(2)} (SEM BEBIDA)</div>
                     </div>
 
                     <AnimatePresence>
@@ -430,10 +431,10 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
                                                     <div key={`${event.id}-${attendeeUserId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.4rem 0.75rem', background: 'var(--surface-container-high)', borderRadius: '4px', gap: '1rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0, flex: 1 }}>
                                                             <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--surface)', overflow: 'hidden', flexShrink: 0 }}>
-                                                                {group.profile.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+                                                                {group.profile?.avatar_url && <img src={group.profile.avatar_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
                                                             </div>
                                                             <div style={{ minWidth: 0 }}>
-                                                                <p style={{ fontWeight: 900, fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{group.profile.full_name}</p>
+                                                                <p style={{ fontWeight: 900, fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{group.profile?.full_name || 'Navegador'}</p>
                                                                 <p style={{ fontSize: '0.65rem', fontWeight: 600, color: group.totalPending > 0 ? '#E57373' : '#81C784' }}>
                                                                     {group.totalPending > 0 ? `R$ ${group.totalPending.toFixed(2)}` : 'PAGO ✓'}
                                                                 </p>
