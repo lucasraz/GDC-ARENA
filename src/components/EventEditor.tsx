@@ -60,10 +60,10 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
       
       {/* LEFT COLUMN: BASIC INFO */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <h4 style={{ fontSize: '0.9rem', fontWeight: 900, color: 'var(--primary)', marginBottom: '0.5rem' }}>DADOS BÁSICOS</h4>
+        <h4 style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--primary)', marginBottom: '0.25rem', letterSpacing: '0.05em' }}>DADOS BÁSICOS</h4>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
               <Type size={14} /> TÍTULO *
           </label>
           <input 
@@ -73,11 +73,12 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             required
+            style={{ marginBottom: 0 }}
           />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
               <MapPin size={14} /> LOCAL *
           </label>
           <input 
@@ -87,12 +88,13 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             required
+            style={{ marginBottom: 0 }}
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '1rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: '1 1 200px' }}>
+                <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
                     <Calendar size={14} /> DATA E HORA *
                 </label>
                 <input 
@@ -101,10 +103,11 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
                     value={formData.event_time}
                     onChange={(e) => setFormData({ ...formData, event_time: e.target.value })}
                     required
+                    style={{ marginBottom: 0, width: '100%' }}
                 />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: '1 1 120px' }}>
+                <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
                     <DollarSign size={14} /> TICKET (BASE)
                 </label>
                 <input 
@@ -114,18 +117,19 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
                     step="0.01"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                    style={{ marginBottom: 0, width: '100%' }}
                 />
             </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <label className="label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
               <AlignLeft size={14} /> ESCOPO DO EVENTO
           </label>
           <textarea 
             className="input-field" 
             placeholder="Explique o que vai rolar..." 
-            style={{ minHeight: '120px', resize: 'none' }}
+            style={{ minHeight: '120px', resize: 'none', marginBottom: 0 }}
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           />
