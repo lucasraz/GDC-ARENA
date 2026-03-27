@@ -5,7 +5,7 @@ import ShareButtons from '@/components/ShareButtons'
 
 export default async function NoticiaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const noticia = noticiasData.find(n => n.id === id)
+  const noticia = (noticiasData as any[]).find(n => n.id === id)
 
   if (!noticia) {
     notFound()
