@@ -83,6 +83,7 @@ GDC-ARENA/
 - **Tactical Scaling**: Elements in `TacticalField.tsx` use `.tactical-shield` (56px desktop / 38px mobile) and `.tactical-label` classes for unified responsive behavior.
 - **Mobile Navigation**: Replaced bottom navigation with a top-level **Drawer Menu** (`MobileNavigation.tsx`) for a cleaner, functional "Premium" look.
 - **Global Interaction**: Implemented `-webkit-tap-highlight-color: transparent` to eliminate browser-default click artifacts (green squares) on mobile.
+- **News Parser**: `NoticiaDetailPage` (`[id]/page.tsx`) implements a basic Markdown-lite parser that supports bold text (`**text**`) and double-newline parágrafos (`\n\n`) for enhanced question-and-answer (Q&A) editorial formatting.
 
 ### 🚀 Deployment & Environment
 - **Platform**: Vercel (Production ready).
