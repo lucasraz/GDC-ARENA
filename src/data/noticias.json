@@ -8,7 +8,7 @@
     "source_url": "https://www.lance.com.br/vasco",
     "date": "2026-03-26",
     "category": "NOTÍCIAS / POLÍCIA",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=1080,quality=75,format=webp/uploads/2024/05/vasco-treino-nike.jpg"
+    "image_url": "/noticias/nike.jpg"
   },
   {
     "id": "cuiabano-radar-europeu-2026",
@@ -19,7 +19,7 @@
     "source_url": "https://www.supervasco.com/",
     "date": "2026-03-26",
     "category": "MERCADO DA BOLA",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=1080,quality=75,format=webp/uploads/2024/04/cuiabano-vasco-aspect-ratio-512-320.jpg"
+    "image_url": "/noticias/cuiabano.jpg"
   },
   {
     "id": "aposentadoria-payet-historico-2026",
@@ -30,7 +30,7 @@
     "source_url": "https://www.cnnbrasil.com.br/esportes",
     "date": "2026-03-26",
     "category": "FUTEBOL / HISTÓRIA",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=1080,quality=75,format=webp/uploads/2023/10/payet-vasco-aspect-ratio-512-320.jpg"
+    "image_url": "/noticias/payet.jfif"
   },
   {
     "id": "saf-vasco-lamacchia-acerto-2026",
@@ -41,7 +41,7 @@
     "source_url": "https://www.torcedores.com/",
     "date": "2026-03-26",
     "category": "MERCADO / SAF",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=1080,quality=75,format=webp/uploads/2024/05/marcos-lamacchia-aspect-ratio-512-320.jpg"
+    "image_url": "/noticias/lamachia.jpg"
   },
   {
     "id": "maratona-logistica-vasco-abril-2026",
@@ -52,17 +52,17 @@
     "source_url": "https://vasconoticias.com.br/noticias/",
     "date": "2026-03-26",
     "category": "LOGÍSTICA / DESAFIO",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=950,quality=75,fit=pad,format=webp/uploads/2026/03/WhatsApp-Image-2026-03-25-at-23.36.48-aspect-ratio-512-320.jpeg"
+    "image_url": "https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?w=800&q=80"
   },
   {
     "id": "renato-detalhe-equipe",
     "title": "Renato comenta carinho da torcida e aponta detalhe a melhorar",
     "excerpt": "Em entrevista, Renato Gaúcho revelou como os rorcedores choram ao encontrá-lo, mas ressaltou que a equipe ainda precisa de ajustes fundamentais.",
-    "full_content": "Em uma entrevista emocionante para o 'Ge', o técnico Renato Gaúcho abriu o coração sobre sua relação com o torcedor vascaíno. Ele relatou episódios em que torcedores choram e o abraçam espontaneamente nas ruas do Rio de Janeiro, agradecendo pelo trabalho de reestruturação técnica que tirou o time das últimas posições. O carinho é recíproco, porém o treinador mantém os pés no chão.\n\nRenato ressaltou que, apesar da lua de mel com a arquibancada, existe um 'detalhe fundamental' que a equipe precisa melhorar: a consistência defensiva nos minutos finais. Segundo o técnico, o Vasco tem sofrido pressões desnecessárias em jogos que já estavam sob controle, o que pode ser fatal na sequência do Campeonato Brasileiro. 'O carinho me motiva, mas meu foco é corrigir os erros para que o torcedor continue sorrindo', afirmou o comandante cruzmaltino.\n\nPara as próximas rodadas, a comissão técnica deve focará em treinamentos de posicionamento tático e transição defensiva acelerada. O objetivo é consolidar o Vasco no G-6 antes da parada para a Copa do Brasil, garantindo que o time jogue de forma segura tanto dentro quanto fora de São Januário.",
+    "full_content": "Em uma entrevista emocionante para o 'Ge', o técnico Renato Gaúcho abriu o coração sobre sua relação com o torcedor vascaíno. Ele relatou episódios em que torcedores choram e o abraçam espontaneamente nas ruas do Rio de Janeiro, agradecendo pelo trabalho de reestruturação técnica que tirou o time das últimas posições. O carinho é recíproco, porém o treinador mantém os pés no chão.\n\nRenato ressaltou que, apesar da lua de mel com a arquibancada, existe um 'detalhe fundamental' que a equipe precisa melhorar: a consistência defensiva nos minutos finais. Segundo o técnico, o Vasco tem sofrido pressões desnecessárias em jogos que já estavam sob controle, o que pode ser fatal na sequência do Campeonato Brasileiro. 'O carinho me motiva, mas meu foco é corrigir os erros para que o torcedor continue sorrindo', afirmou o comandante cruzmaltino.\n\nPara as próximas rodadas, a comissão técnica deve focar em treinamentos de posicionamento tático e transição defensiva acelerada. O objetivo é consolidar o Vasco no G-6 antes da parada para a Copa do Brasil, garantindo que o time jogue de forma segura tanto dentro quanto fora de São Januário.",
     "source_name": "LANCE!",
     "source_url": "https://www.lance.com.br/vasco",
     "date": "2026-03-26",
     "category": "FUTEBOL / BASTIDORES",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=850,quality=75,format=webp/uploads/2024/03/Renato-Gaucho-2-1920x1280.jpg"
+    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=850,quality=75,format=webp/uploads/2023/10/Renato-Gaucho-2-1920x1280.jpg"
   }
 ]
