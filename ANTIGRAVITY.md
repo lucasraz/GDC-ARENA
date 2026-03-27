@@ -12,6 +12,18 @@
 - **Testing (TDD):** Vitest / Jest / Playwright.
 - **CI/CD:** GitHub Actions / Vercel.
 
+## 📰 News Management Policy
+1. **LIFO Stacking:** New updates must prepend (rather than overwrite) the existing news in `noticias.json`.
+2. **Historical Limit:** Maintain a maximum of 50 news items to ensure performance and file portability.
+3. **Drafting Policy:** Use NotebookLM orchestration to verify real-time data before updating.
+4. **ID Uniqueness:** Every news item must have a unique readable ID based on its title.
+
+## 🛠️ Final Checkpoint: Mobile Stability (v1.2)
+- [x] **Client-Side Exception Fix**: Refactored `EventsClient` to avoid Hook violations.
+- [x] **Body Size Limit Fix**: Increased server actions limit to 10MB in `next.config.mjs`.
+- [x] **Defensive Rendering**: Added optional chaining and defaults for all event data.
+- [x] **News History**: Transitioned from overwrite to prepend stacking logic.
+
 ## 🏛️ 3-Layer Micro-SaaS Architecture (directives/ orchestration/ execution/)
 Following strictly AGENTS_MSAAS.md instructions:
 
