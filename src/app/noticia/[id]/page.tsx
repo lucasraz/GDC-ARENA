@@ -66,14 +66,27 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
             </p>
           </header>
 
-          <div style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vw, 500px)', marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden' }}>
-            <Image 
-              src={noticia.image_url || noticia.image || '/noticias/default.jpg'} 
-              alt={noticia.title} 
-              fill 
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
+          {noticia.video_url ? (
+            <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden', backgroundColor: '#000' }}>
+              <iframe
+                src={noticia.video_url}
+                title={noticia.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              ></iframe>
+            </div>
+          ) : (
+            <div style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vw, 500px)', marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden' }}>
+              <Image 
+                src={noticia.image_url || noticia.image || '/noticias/default.jpg'} 
+                alt={noticia.title} 
+                fill 
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          )}
 
           <div style={{ color: 'var(--on-surface)', whiteSpace: 'pre-wrap' }}>
             {(noticia.full_content || noticia.excerpt || "").split('\n\n').map((paragraph: string, index: number) => {
