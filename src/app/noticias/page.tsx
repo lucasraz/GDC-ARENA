@@ -35,33 +35,76 @@ export default function NoticiasPage() {
       </section>
 
       <section className="noticias-grid">
-        
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-          {articles.map((article: any, index: number) => (
-            <article key={article.id} style={{ borderBottom: index === articles.length - 1 ? 'none' : '1px solid var(--outline-variant)', paddingBottom: '3rem' }}>
-              <div className="article-container">
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-                    <span className="label" style={{ background: 'var(--primary-container)', color: 'white', padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}>{article.category}</span>
-                    <span className="label" style={{ opacity: 0.5, fontSize: '0.75rem' }}>{article.date}</span>
+          {/* DESTAQUES (Primeiras 4 notícias) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            {articles.slice(0, 4).map((article: any, index: number) => (
+              <article key={article.id} style={{ borderBottom: index === 3 ? 'none' : '1px solid var(--outline-variant)', paddingBottom: '3rem' }}>
+                <div className="article-container">
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
+                      <span className="label" style={{ background: 'var(--primary-container)', color: 'white', padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}>{article.category}</span>
+                      <span className="label" style={{ opacity: 0.5, fontSize: '0.75rem' }}>{article.date}</span>
+                    </div>
+                    <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', marginBottom: '1.25rem', textTransform: 'none', lineHeight: '1.2' }}>{article.title}</h2>
+                    <p style={{ fontSize: '1.1rem', lineHeight: '1.6', opacity: 0.85, fontFamily: 'var(--font-newsreader)' }}>{article.excerpt}</p>
                   </div>
-                  <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', marginBottom: '1.25rem', textTransform: 'none', lineHeight: '1.2' }}>{article.title}</h2>
-                  <p style={{ fontSize: '1.1rem', lineHeight: '1.6', opacity: 0.85, fontFamily: 'var(--font-newsreader)' }}>{article.excerpt}</p>
+
+                  {(article.image_url || article.image) && (
+                    <div className="article-image" style={{ width: '300px', height: '200px', position: 'relative', flexShrink: 0, borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--outline-variant)' }}>
+                      <NextImage src={article.image_url || article.image} alt={article.title} fill style={{ objectFit: 'cover' }} />
+                    </div>
+                  )}
                 </div>
 
-                {article.image_url && (
-                  <div className="article-image" style={{ width: '300px', height: '200px', position: 'relative', flexShrink: 0, borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--outline-variant)' }}>
-                    <NextImage src={article.image_url} alt={article.title} fill style={{ objectFit: 'cover' }} />
-                  </div>
-                )}
-              </div>
+                <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span className="label" style={{ opacity: 0.6, fontSize: '0.7rem' }}>FONTE: {article.source_name || article.source}</span>
+                  <a href={`/noticia/${article.id}`} className="label" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 900 }}>LER MATÉRIA COMPLETA →</a>
+                </div>
+              </article>
+            ))}
+          </div>
 
-              <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="label" style={{ opacity: 0.6, fontSize: '0.7rem' }}>FONTE: {article.source_name}</span>
-                <a href={`/noticia/${article.id}`} className="label" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 900 }}>LER MATÉRIA COMPLETA →</a>
+          {/* NOTÍCIAS ANTERIORES (O restante) */}
+          {articles.length > 4 && (
+            <div style={{ marginTop: '3rem' }}>
+              <div style={{ borderBottom: '2px solid var(--primary)', marginBottom: '2.5rem', display: 'inline-block' }}>
+                <h3 className="label" style={{ fontSize: '1.2rem', paddingBottom: '0.5rem' }}>NOTÍCIAS ANTERIORES</h3>
               </div>
-            </article>
-          ))}
+              
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+                {articles.slice(4).map((article: any) => (
+                  <article key={article.id} style={{ 
+                    background: 'var(--surface-container-low)', 
+                    padding: '1.5rem', 
+                    borderRadius: '8px', 
+                    border: '1px solid var(--outline-variant)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                    transition: 'transform 0.2s',
+                    cursor: 'pointer'
+                  }} className="card-hover">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                      <span className="label" style={{ color: 'var(--primary)', fontSize: '0.65rem' }}>{article.category}</span>
+                      <span className="label" style={{ opacity: 0.4, fontSize: '0.65rem' }}>{article.date}</span>
+                    </div>
+                    
+                    <h4 style={{ fontSize: '1.25rem', fontWeight: 800, lineHeight: 1.3, minHeight: '3.25rem' }}>{article.title}</h4>
+                    
+                    <p style={{ fontSize: '0.9rem', opacity: 0.7, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {article.excerpt}
+                    </p>
+                    
+                    <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--outline-variant)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span className="label" style={{ opacity: 0.5, fontSize: '0.6rem' }}>{article.source_name || article.source}</span>
+                      <a href={`/noticia/${article.id}`} style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.7rem', fontWeight: 900 }}>LER →</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <aside style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
