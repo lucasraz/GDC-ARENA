@@ -35,6 +35,25 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
         return
     }
 
+    let isoTime = ""
+    try {
+        if (formData.event_time) {
+            const dateObj = new Date(formData.event_time)
+            if (isNaN(dateObj.getTime())) {
+                throw new Error("Data inválida.")
+            }
+            isoTime = dateObj.toISOString()
+        } else {
+            setError('Defina uma data e hora para o evento.')
+            setIsSubmitting(false)
+            return
+        }
+    } catch (e) {
+        setError('Formato de data e hora inválido.')
+        setIsSubmitting(false)
+        return
+    }
+
     const result = await onSubmit({
         ...formData,
         price: parseFloat(formData.price) || 0,
@@ -42,7 +61,7 @@ export default function EventEditor({ onSubmit, onCancel }: EventEditorProps) {
         beer_price_brahma: parseFloat(formData.beer_price_brahma) || 0,
         beer_price_antarctica: parseFloat(formData.beer_price_antarctica) || 0,
         beer_price_stella: parseFloat(formData.beer_price_stella) || 0,
-        event_time: new Date(formData.event_time).toISOString()
+        event_time: isoTime
     })
 
     if (!result.success) {
