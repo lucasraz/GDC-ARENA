@@ -4,7 +4,7 @@ import json
 import shutil
 import os
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 # Configurações de Caminhos
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +27,13 @@ class GDCManager:
         self.cartola_data: Dict[str, Any] = {}
         self.img_var = tk.StringVar(value="")
 
+        # Widgets
+        self.title_ent: Optional[tk.Entry] = None
+        self.excerpt_txt: Optional[tk.Text] = None
+        self.rodada_ent: Optional[tk.Entry] = None
+        self.e_title: Optional[tk.Entry] = None
+        self.e_desc: Optional[tk.Text] = None
+
         self.style = ttk.Style()
         self.style.theme_use('clam')
         self.style.configure("TFrame", background="#121212")
@@ -48,7 +55,6 @@ class GDCManager:
         ttk.Button(self.main_frame, text="ATUALIZAR NOTÍCIAS (NotebookLM)", command=self.start_news_update, width=40).pack(pady=10)
         ttk.Button(self.main_frame, text="ATUALIZAR CARTOLA (NotebookLM)", command=self.start_cartola_update, width=40).pack(pady=10)
 
-    # --- NOTÍCIAS ---
     def start_news_update(self):
         if not os.path.exists(DRAFT_JSON):
             messagebox.showerror("Erro", "Arquivo de rascunho de notícias não encontrado!")
@@ -90,6 +96,7 @@ class GDCManager:
         ttk.Button(nav, text="CONFIRMAR E PRÓXIMA", command=self.save_current_news).pack(side=tk.RIGHT, padx=5)
 
     def save_current_news(self):
+        if not self.title_ent or not self.excerpt_txt: return
         title = self.title_ent.get()
         excerpt = self.excerpt_txt.get("1.0", tk.END).strip()
         img = self.img_var.get()
@@ -101,12 +108,17 @@ class GDCManager:
             filename = f"news_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{self.current_news_idx}{ext}"
             shutil.copy(img, os.path.join(IMG_DIR, filename))
 
+        # Usando chaves legadas para compatibilidade
         self.new_articles.append({
             "id": f"{datetime.now().strftime('%Y%m%d%H%M%S')}{self.current_news_idx}",
-            "title": title, "excerpt": excerpt, "image": f"/noticias/{filename}" if filename else "",
-            "date": datetime.now().strftime("%d/%m/%Y"), "category": "VASCO",
-            "url": self.drafts[self.current_news_idx].get('url', '#'),
-            "source": self.drafts[self.current_news_idx].get('source', 'GDC')
+            "title": title, 
+            "excerpt": excerpt, 
+            "full_content": excerpt, # Replica excerpt como conteúdo completo
+            "image_url": f"/noticias/{filename}" if filename else "",
+            "date": datetime.now().strftime("%Y-%m-%d"), 
+            "category": "VASCO",
+            "source_url": self.drafts[self.current_news_idx].get('url', '#'),
+            "source_name": self.drafts[self.current_news_idx].get('source', 'GDC Arena')
         })
         self.current_news_idx += 1
         self.show_news_validator()
@@ -127,7 +139,6 @@ class GDCManager:
             self.show_main_menu()
         except Exception as e: messagebox.showerror("Erro", str(e))
 
-    # --- CARTOLA ---
     def start_cartola_update(self):
         self.clear_frame()
         draft_cartola = {}
@@ -140,8 +151,9 @@ class GDCManager:
         if draft_cartola:
             self.cartola_data['rodada'] = draft_cartola.get('rodada', self.cartola_data.get('rodada'))
             if 'consolidated' not in self.cartola_data: self.cartola_data['consolidated'] = {}
-            self.cartola_data['consolidated']['title'] = draft_cartola.get('consolidated', {}).get('title', self.cartola_data['consolidated'].get('title'))
-            self.cartola_data['consolidated']['description'] = draft_cartola.get('consolidated', {}).get('description', self.cartola_data['consolidated'].get('description'))
+            cons = draft_cartola.get('consolidated', {})
+            self.cartola_data['consolidated']['title'] = cons.get('title', self.cartola_data['consolidated'].get('title'))
+            self.cartola_data['consolidated']['description'] = cons.get('description', self.cartola_data['consolidated'].get('description'))
 
         ttk.Label(self.main_frame, text="Atualizar Dicas do Cartola (NotebookLM)", font=("Arial", 12, "bold")).pack(pady=10)
         ttk.Label(self.main_frame, text="Rodada:").pack(anchor=tk.W)
@@ -165,6 +177,7 @@ class GDCManager:
         ttk.Button(nav, text="SALVAR DICAS", command=self.save_cartola).pack(side=tk.RIGHT, padx=5)
 
     def save_cartola(self):
+        if not self.rodada_ent or not self.e_title or not self.e_desc: return
         try:
             self.cartola_data['rodada'] = int(self.rodada_ent.get())
             self.cartola_data['consolidated']['title'] = self.e_title.get()

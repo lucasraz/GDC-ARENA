@@ -34,7 +34,7 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
 
           <div style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vw, 500px)', marginBottom: '3rem', borderRadius: '4px', overflow: 'hidden' }}>
             <Image 
-              src={noticia.image_url} 
+              src={noticia.image_url || noticia.image || '/noticias/default.jpg'} 
               alt={noticia.title} 
               fill 
               style={{ objectFit: 'cover' }}
@@ -42,7 +42,7 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
           </div>
 
           <div style={{ color: 'var(--on-surface)', whiteSpace: 'pre-wrap' }}>
-            {noticia.full_content.split('\n\n').map((paragraph, index) => (
+            {(noticia.full_content || noticia.excerpt || "").split('\n\n').map((paragraph: string, index: number) => (
               <p key={index} style={{ marginBottom: '1.5rem', fontSize: '1.2rem', lineHeight: '1.8' }}>
                 {paragraph}
               </p>
@@ -51,7 +51,7 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
 
           <footer style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--outline-variant)', opacity: 0.6 }}>
             <p className="label" style={{ fontSize: '0.8rem' }}>
-                FONTE ORIGINAL: <a href={noticia.source_url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>{noticia.source_name}</a>
+                FONTE ORIGINAL: <a href={noticia.source_url || noticia.url || '#'} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>{noticia.source_name || noticia.source || 'GDC Arena'}</a>
             </p>
           </footer>
           
