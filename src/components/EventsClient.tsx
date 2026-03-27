@@ -35,10 +35,12 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
     })
 
     const availableBeers: { id: string, name: string, price: number }[] = []
-    if (event.beer_price_heineken > 0) availableBeers.push({ id: 'heineken', name: 'HEINEKEN', price: event.beer_price_heineken })
-    if (event.beer_price_stella > 0) availableBeers.push({ id: 'stella', name: 'STELLA', price: event.beer_price_stella })
-    if (event.beer_price_brahma > 0) availableBeers.push({ id: 'brahma', name: 'BRAHMA', price: event.beer_price_brahma })
-    if (event.beer_price_antarctica > 0) availableBeers.push({ id: 'antarctica', name: 'ANTARCTICA', price: event.beer_price_antarctica })
+    if (!event.consume_on_site) {
+        if (event.beer_price_heineken > 0) availableBeers.push({ id: 'heineken', name: 'HEINEKEN', price: event.beer_price_heineken })
+        if (event.beer_price_stella > 0) availableBeers.push({ id: 'stella', name: 'STELLA', price: event.beer_price_stella })
+        if (event.beer_price_brahma > 0) availableBeers.push({ id: 'brahma', name: 'BRAHMA', price: event.beer_price_brahma })
+        if (event.beer_price_antarctica > 0) availableBeers.push({ id: 'antarctica', name: 'ANTARCTICA', price: event.beer_price_antarctica })
+    }
 
     const myUnpaidRecords = myAttendanceRecords.filter((a: any) => !a.is_paid)
     const myUnpaidBill = myUnpaidRecords.reduce((total: number, a: any) => {
@@ -137,7 +139,9 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
             <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem', fontWeight: 700, flexWrap: 'wrap', opacity: isExpanded ? 1 : 0.6 }}>
                 <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><MapPin size={14} /> {event.location}</div>
                 <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {event.event_time ? new Date(event.event_time).toLocaleString('pt-BR') : 'Data a definir'}</div>
-                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>VALOR: R$ {(event.price || 0).toFixed(2)} (SEM BEBIDA)</div>
+                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>
+                    VALOR: R$ {(event.price || 0).toFixed(2)} {event.consume_on_site ? '(CONSUMO NO LOCAL)' : '(SEM BEBIDA)'}
+                </div>
             </div>
 
             <AnimatePresence>
@@ -155,20 +159,22 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                             paddingTop: '1rem'
                         }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0 }}>
-                                <div style={{ background: 'var(--surface-container-low)', padding: '1.25rem', borderRadius: '4px' }}>
-                                        <p className="label" style={{ marginBottom: '1rem', fontSize: '0.6rem', opacity: 0.6 }}>RESUMO DE CONSUMO</p>
-                                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                                        {Object.entries(beerCounts).map(([beer, count]) => {
-                                            if (count === 0 && (beer === 'nenhuma' || beer === 'none')) return null
-                                            return (
-                                                <div key={beer} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                    <Beer size={14} style={{ color: 'var(--primary)' }} />
-                                                    <span style={{ fontSize: '0.75rem', fontWeight: 900 }}>{count} {beer.toUpperCase()}</span>
-                                                </div>
-                                            )
-                                        })}
-                                        </div>
-                                </div>
+                                {!event.consume_on_site && (
+                                    <div style={{ background: 'var(--surface-container-low)', padding: '1.25rem', borderRadius: '4px' }}>
+                                            <p className="label" style={{ marginBottom: '1rem', fontSize: '0.6rem', opacity: 0.6 }}>RESUMO DE CONSUMO</p>
+                                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                                            {Object.entries(beerCounts).map(([beer, count]) => {
+                                                if (count === 0 && (beer === 'nenhuma' || beer === 'none')) return null
+                                                return (
+                                                    <div key={beer} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                        <Beer size={14} style={{ color: 'var(--primary)' }} />
+                                                        <span style={{ fontSize: '0.75rem', fontWeight: 900 }}>{count} {beer.toUpperCase()}</span>
+                                                    </div>
+                                                )
+                                            })}
+                                            </div>
+                                    </div>
+                                )}
 
                                 {userId === event.author_id && (
                                     <div style={{ display: 'flex', gap: '1rem' }}>
@@ -212,7 +218,7 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                                                                 }} 
                                                             />
                                                             <span style={{ fontWeight: 600, opacity: r.is_paid ? 0.4 : 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                                                {r.guest_name || 'VOCÊ'} <small style={{ fontWeight: 400, fontSize: '0.65rem' }}>({r.selected_beer.toUpperCase()})</small>
+                                                                {r.guest_name || 'VOCÊ'} {!event.consume_on_site && <small style={{ fontWeight: 400, fontSize: '0.65rem' }}>({r.selected_beer.toUpperCase()})</small>}
                                                             </span>
                                                         </div>
                                                         <span style={{ fontWeight: 900, color: r.is_paid ? '#81C784' : 'inherit', fontSize: '0.7rem', flexShrink: 0 }}>
@@ -236,10 +242,12 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                                     <button onClick={(e) => { e.stopPropagation(); router.push('/login'); }} className="btn-primary">LOGAR PARA PARTICIPAR</button>
                                 ) : !isConfirmed ? (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                        <select onClick={(e) => e.stopPropagation()} className="input-field" style={{ fontSize: '0.85rem' }} value={selectedBeer} onChange={(e) => setSelectedBeer(e.target.value)}>
-                                            <option value="nenhuma">NÃO VOU BEBER</option>
-                                            {availableBeers.map(b => <option key={b.id} value={b.id}>{b.name.toUpperCase()} (+R$ {b.price.toFixed(2)})</option>)}
-                                        </select>
+                                        {!event.consume_on_site && (
+                                            <select onClick={(e) => e.stopPropagation()} className="input-field" style={{ fontSize: '0.85rem' }} value={selectedBeer} onChange={(e) => setSelectedBeer(e.target.value)}>
+                                                <option value="nenhuma">NÃO VOU BEBER</option>
+                                                {availableBeers.map(b => <option key={b.id} value={b.id}>{b.name.toUpperCase()} (+R$ {b.price.toFixed(2)})</option>)}
+                                            </select>
+                                        )}
                                         <button onClick={(e) => { e.stopPropagation(); onJoin(event.id, undefined, selectedBeer); }} className="btn-primary" style={{ padding: '0.9rem' }}>CONFIRMAR PRESENÇA</button>
                                     </div>
                                 ) : (
@@ -257,10 +265,12 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                                         {guestInput.isAdding && (
                                             <div onClick={(e) => e.stopPropagation()} style={{ padding: '1rem', background: 'var(--surface-container-low)', borderRadius: '4px', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                                 <input className="input-field" style={{ fontSize: '0.85rem' }} placeholder="Nome do Convidado" value={guestInput.name} onChange={(e) => setGuestInput({...guestInput, name: e.target.value})} />
-                                                <select className="input-field" style={{ fontSize: '0.85rem' }} value={guestInput.beer} onChange={(e) => setGuestInput({...guestInput, beer: e.target.value})}>
-                                                    <option value="nenhuma">SEM BEBIDA</option>
-                                                    {availableBeers.map(b => <option key={b.id} value={b.id}>{b.name.toUpperCase()}</option>)}
-                                                </select>
+                                                {!event.consume_on_site && (
+                                                    <select className="input-field" style={{ fontSize: '0.85rem' }} value={guestInput.beer} onChange={(e) => setGuestInput({...guestInput, beer: e.target.value})}>
+                                                        <option value="nenhuma">SEM BEBIDA</option>
+                                                        {availableBeers.map(b => <option key={b.id} value={b.id}>{b.name.toUpperCase()}</option>)}
+                                                    </select>
+                                                )}
                                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                                     <button onClick={() => { onJoin(event.id, guestInput.name, guestInput.beer); setGuestInput({ name: '', beer: 'nenhuma', isAdding: false }); }} className="btn-primary" style={{ fontSize: '0.7rem', flex: 1, padding: '0.6rem' }}>ADICIONAR</button>
                                                     <button onClick={() => setGuestInput({ name: '', beer: 'nenhuma', isAdding: false })} className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--outline)', color: 'inherit', padding: '0.5rem', width: '40px' }}><X size={16}/></button>
@@ -397,8 +407,8 @@ export default function EventsClient({ userId, tenantId, initialEvents }: any) {
       let msg = ''
       if (isPaid) {
           const guestList = personalRecords.filter(r => r.guest_name).map(r => r.guest_name).join(', ') || 'Apenas você'
-          const beersList = [...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')
-          msg = `Olá ${profileData?.full_name || 'Amigo'}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}\n🍺 Cervejas: ${beersList}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
+          const beersInfo = event.consume_on_site ? '' : `\n🍺 Cervejas: ${[...new Set(personalRecords.map(r => r.selected_beer.toUpperCase()))].join(', ')}`
+          msg = `Olá ${profileData?.full_name || 'Amigo'}! ✅ Confirmamos sua quitação para o evento *${event.title}*.\n\n📅 Data: ${new Date(event.event_time).toLocaleDateString('pt-BR')}\n👥 Convidados: ${guestList}\n📍 Local: ${event.location}${beersInfo}\n⏰ Horário: ${new Date(event.event_time).toLocaleTimeString('pt-BR')}\n\nAgradecemos sua participação!\nEquipe GDC.`
       } else {
           msg = `Olá ${profileData?.full_name || 'Amigo'}! 👋 Sou o organizador do evento *${event.title}*. Segue lembrete de pagamento pendente de *R$ ${amount.toFixed(2)}* para você e seus convidados. Favor desconsiderar se já foi pago. Equipe GDC.`
       }
