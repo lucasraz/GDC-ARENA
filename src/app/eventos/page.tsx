@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
 import EventsClient from '../../components/EventsClient'
 
 export const dynamic = 'force-dynamic'
@@ -32,28 +31,11 @@ export default async function EventosPage() {
     `)
     .order('event_time', { ascending: true })
 
-  // Safely fetch comments as a second step if events were found
-  let eventsWithComments = events || []
-  if (events && events.length > 0) {
-    const { data: allComments } = await supabase
-      .from('event_comments')
-      .select(`
-          *,
-          author_profile:profiles(full_name, avatar_url)
-      `)
-      .in('event_id', events.map(e => e.id))
-
-    if (allComments) {
-        eventsWithComments = events.map(event => ({
-            ...event,
-            comments: allComments.filter(c => c.event_id === event.id)
-        }))
-    }
-  }
-
   if (error) {
       console.error('Error fetching events:', error)
   }
+
+  const eventsData = events || []
 
   return (
     <main className="min-h-screen">
@@ -70,7 +52,7 @@ export default async function EventosPage() {
           <EventsClient 
             userId={user?.id} 
             tenantId={TENANT_ID} 
-            initialEvents={eventsWithComments} 
+            initialEvents={eventsData} 
           />
         </div>
       </section>

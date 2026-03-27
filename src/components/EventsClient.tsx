@@ -12,13 +12,11 @@ import {
   Trash2,
   AlertCircle,
   Share2,
-  ChevronDown,
-  MessageCircle
+  ChevronDown
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { joinEvent, leaveEvent, deleteEvent, saveEvent, togglePaymentStatus } from '@/app/actions/event_actions'
 import EventEditor from './EventEditor'
-import EventCommentsSection from './EventCommentsSection'
 
 function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, sendWhatsAppMessage }: any) {
     const [isExpanded, setIsExpanded] = useState(false)
@@ -97,9 +95,6 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                     <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', opacity: 0.6, minWidth: 0, marginLeft: '0.25rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', flexShrink: 0 }}>
                             <Users size={14} /> <span>{attendeeCount}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', flexShrink: 0 }}>
-                            <MessageCircle size={14} /> <span>{event.comments?.length || 0}</span>
                         </div>
                     </div>
                     </div>
@@ -344,13 +339,7 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                             </div>
                         )}
 
-                        <div onClick={(e) => e.stopPropagation()}>
-                            <EventCommentsSection 
-                                eventId={event.id}
-                                currentUserId={userId}
-                                initialComments={event.comments || []}
-                            />
-                        </div>
+
                     </motion.div>
                 )}
             </AnimatePresence>

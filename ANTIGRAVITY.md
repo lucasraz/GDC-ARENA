@@ -96,8 +96,7 @@ GDC-ARENA/
 - `MobileNavigation.tsx`: Client Drawer for mobile links.
 - `TacticalField.tsx`: Responsive 4-3-3 soccer field visualization.
 - `ShareButtons.tsx`: Unified broadcasting component for News, Chronicles, and Events (Web Share API + WhatsApp).
-- `EventsClient.tsx`: Features expandable cards and integrated tactical discussions (Comments).
-- `EventCommentsSection.tsx`: Real-time community engagement for match events.
+- `EventsClient.tsx`: Features expandable cards for match events.
 - `Footer.tsx`: Integrated Official Instagram link with premium SVG branding.
 
 ### 📅 Next Steps
@@ -116,7 +115,7 @@ GDC-ARENA/
 - [x] Visual Tactical Field (4-3-3) with real Club Crests (Brasões).
 - [x] Simplified Elite Command (Original Tactical 4-3-3).
 - [x] Financial Orchestration (Payment Status, Bulk Quitação, RLS Master Key).
-- [x] Community Engagement (Event Comments & Tactical Discussions).
+- [x] Community Engagement (Event Comments & Tactical Discussions) - [REMOVED].
 - [x] Content Broadcasting (Share System for News/Cronicas/Events).
 - [x] Mobile Polish (Clean Cartola UI, Instagram Footer, No Click Artifacts).
 - [ ] Implement Tenant Discovery/Creation logic (for new users).
