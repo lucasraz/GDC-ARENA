@@ -52,7 +52,7 @@
     "source_url": "https://vasconoticias.com.br/noticias/",
     "date": "2026-03-26",
     "category": "LOGÍSTICA / DESAFIO",
-    "image_url": "https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?w=800&q=80"
+    "image_url": "/noticias/corrida.png"
   },
   {
     "id": "renato-detalhe-equipe",
@@ -63,6 +63,6 @@
     "source_url": "https://www.lance.com.br/vasco",
     "date": "2026-03-26",
     "category": "FUTEBOL / BASTIDORES",
-    "image_url": "https://lncimg.lance.com.br/cdn-cgi/image/width=850,quality=75,format=webp/uploads/2023/10/Renato-Gaucho-2-1920x1280.jpg"
+    "image_url": "/noticias/renato.png"
   }
 ]
