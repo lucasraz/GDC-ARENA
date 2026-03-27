@@ -132,4 +132,10 @@ Mandatory variables to be set in Vercel to avoid `MIDDLEWARE_INVOCATION_FAILED`:
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your project Anon Key from Supabase dashboard.
 - `SUPABASE_SERVICE_ROLE_KEY`: (Internal/Backend) for high-privilege operations (Layer 2).
 
+### ⚙️ Suporte Editorial
+- **GDC Content Manager (`scripts/gdc_manager.py`)**: Utilitário Python (GUI) para validação e publicação de conteúdos.
+    - **Fluxo Notícias**: NotebookLM -> `draft_noticias.json` -> GDC Manager -> `noticias.json`.
+    - **Fluxo Cartola**: Edição direta de `cartola_tips.json` via interface.
+
+
 
