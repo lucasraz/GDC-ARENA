@@ -3,17 +3,18 @@ import './globals.css'
 import { epilogue, newsreader, inter } from './fonts'
 
 export const metadata: Metadata = {
-  title: 'GDC-ARENA | Nautical Editorial',
+  metadataBase: new URL('https://gdc-arena.vercel.app'),
+  title: 'GDC-ARENA | Vasco, meu primeiro amor',
   description: 'O Gigante da Colina em sua forma definitiva.',
   openGraph: {
-    title: 'GDC-ARENA | Nautical Editorial',
+    title: 'GDC-ARENA | Vasco, meu primeiro amor',
     description: 'O Gigante da Colina em sua forma definitiva.',
     locale: 'pt_BR',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GDC-ARENA | Nautical Editorial',
+    title: 'GDC-ARENA | Vasco, meu primeiro amor',
     description: 'O Gigante da Colina em sua forma definitiva.',
   },
 }
