@@ -129,18 +129,51 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                     </div>
             </div>
 
-            <div style={{ minWidth: 0 }}>
-                <h3 style={{ fontSize: isExpanded ? 'clamp(1.5rem, 6vw, 2.5rem)' : '1.35rem', fontWeight: 900, marginBottom: '0.25rem', transition: 'all 0.3s ease', letterSpacing: '-0.02em' }}>{event.title}</h3>
-                <div style={{ height: isExpanded ? 'auto' : '0', overflow: 'hidden', opacity: 0.7, fontSize: '0.9rem', transition: 'all 0.3s ease', marginTop: isExpanded ? '0.5rem' : '0' }}>
-                    {event.description}
-                </div>
+            <div style={{ minWidth: 0, marginBottom: isExpanded ? '0.5rem' : '0' }}>
+                <h3 style={{ 
+                    fontSize: isExpanded ? 'clamp(1.75rem, 6vw, 3rem)' : '1.35rem', 
+                    fontWeight: 900, 
+                    marginBottom: '0.4rem', 
+                    transition: 'all 0.3s ease', 
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1.1,
+                    textTransform: 'uppercase'
+                }}>
+                    {event.title}
+                </h3>
+                {isExpanded && event.description && (
+                    <div style={{ 
+                        opacity: 0.5, 
+                        fontSize: '1rem', 
+                        lineHeight: '1.5',
+                        fontWeight: 500,
+                        fontFamily: 'inherit',
+                        maxWidth: '600px',
+                        marginBottom: '1rem'
+                    }}>
+                        {event.description}
+                    </div>
+                )}
             </div>
 
-            <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem', fontWeight: 700, flexWrap: 'wrap', opacity: isExpanded ? 1 : 0.6 }}>
-                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><MapPin size={14} /> {event.location}</div>
-                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}><Clock size={14} /> {event.event_time ? new Date(event.event_time).toLocaleString('pt-BR') : 'Data a definir'}</div>
-                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', color: 'var(--primary)' }}>
-                    VALOR: R$ {(event.price || 0).toFixed(2)} {event.consume_on_site ? '(CONSUMO NO LOCAL)' : '(SEM BEBIDA)'}
+            <div style={{ 
+                display: 'flex', 
+                gap: '1rem', 
+                fontSize: '0.75rem', 
+                fontWeight: 700, 
+                flexWrap: 'wrap', 
+                opacity: isExpanded ? 1 : 0.6,
+                padding: isExpanded ? '0' : '0.25rem 0'
+            }}>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '0.5rem 0.8rem', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <MapPin size={14} style={{ color: 'var(--primary)' }} /> <span>{event.location}</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '0.5rem 0.8rem', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <Clock size={14} style={{ color: 'var(--primary)' }} /> <span>{event.event_time ? new Date(event.event_time).toLocaleString('pt-BR') : 'Data a definir'}</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '0.5rem 0.8rem', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ opacity: 0.6 }}>VALOR:</span>
+                    <span style={{ color: 'var(--primary)' }}>R$ {(event.price || 0).toFixed(2)} {event.consume_on_site ? '(CONSUMO)' : '(FIXO)'}</span>
                 </div>
             </div>
 
@@ -177,13 +210,26 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                                 )}
 
                                 {userId === event.author_id && (
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                    <div style={{ marginTop: 'auto' }}>
                                             <button 
                                             onClick={(e) => { e.stopPropagation(); onDelete(event.id); }} 
-                                            className="btn-primary" 
-                                            style={{ background: '#E57373', color: 'white', flex: 1, padding: '0.75rem' }}
+                                            style={{ 
+                                                background: 'transparent', 
+                                                border: '1px solid rgba(229, 115, 115, 0.3)', 
+                                                color: '#E57373', 
+                                                width: '100%', 
+                                                padding: '0.8rem',
+                                                fontSize: '0.65rem',
+                                                fontWeight: 900,
+                                                letterSpacing: '0.05em',
+                                                borderRadius: '4px',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            }}
+                                            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(229, 115, 115, 0.05)'}
+                                            onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
                                             >
-                                            DELETAR EVENTO
+                                            DELETAR ESTE EVENTO
                                             </button>
                                     </div>
                                 )}
@@ -231,10 +277,10 @@ function EventCard({ event, userId, onJoin, onLeave, onDelete, onTogglePayment, 
                                     </div>
                                 )}
 
-                                <div>
-                                        <p className="label" style={{ fontSize: '0.65rem', opacity: 0.5 }}>{isMyGroupFullyPaid ? 'SITUAÇÃO' : 'VALOR A PAGAR'}</p>
-                                        <h4 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', fontWeight: 900, color: isMyGroupFullyPaid ? '#81C784' : 'inherit' }}>
-                                        {isMyGroupFullyPaid ? 'QUITADO' : `R$ ${myUnpaidBill.toFixed(2)}`}
+                                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1.5rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                                        <p className="label" style={{ fontSize: '0.6rem', opacity: 0.5, marginBottom: '0.5rem', letterSpacing: '0.05em' }}>{isMyGroupFullyPaid ? 'STATUS DE QUITAÇÃO' : 'VALOR TOTAL PENDENTE'}</p>
+                                        <h4 style={{ fontSize: 'clamp(2rem, 5vw, 2.75rem)', fontWeight: 900, color: isMyGroupFullyPaid ? '#81C784' : 'inherit', letterSpacing: '-0.04em' }}>
+                                        {isMyGroupFullyPaid ? 'QUITADO ✓' : `R$ ${myUnpaidBill.toFixed(2)}`}
                                         </h4>
                                 </div>
 
