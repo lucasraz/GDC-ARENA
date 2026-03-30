@@ -140,5 +140,13 @@ Mandatory variables to be set in Vercel to avoid `MIDDLEWARE_INVOCATION_FAILED`:
     - **Fluxo Notícias**: NotebookLM -> `draft_noticias.json` -> GDC Manager -> `noticias.json`.
     - **Fluxo Cartola**: Edição direta de `cartola_tips.json` via interface.
 
+### 🛠️ Estado Atual (Small Releases)
+- **30/03/2026**: CICLO EDITORIAL CONCLUÍDO.
+    - [x] 5 Notícias selecionadas e aprovadas pelo usuário.
+    - [x] Imagens manuais vinculadas corretamente na pasta `public/noticias/`.
+    - [x] Limpeza técnica: Remoção de duplicatas e unificação de caminhos no `noticias.json`.
+    - [x] Higiene de Repositório: Remoção de arquivos brutos e ajuste de `.gitignore`.
+
+
 
 

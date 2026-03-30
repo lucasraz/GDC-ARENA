@@ -8,7 +8,8 @@
     "date": "2026-03-30",
     "category": "TORCIDA / VASCO",
     "source_name": "GDC Arena",
-    "source_url": "https://www.vasco.com.br"
+    "source_url": "https://www.vasco.com.br",
+    "image": "/noticias/caldeirao_esgotado.jpg"
   },
   {
     "id": "marino-substituto-gomez-enquete-2026",
@@ -19,7 +20,8 @@
     "date": "2026-03-30",
     "category": "TÁTICA / VASCO",
     "source_name": "GDC Arena",
-    "source_url": "https://www.vasconoticias.com.br"
+    "source_url": "https://www.vasconoticias.com.br",
+    "image": "/noticias/marino.jpg"
   },
   {
     "id": "vasco-vence-jogo-treino-olaria-2026",
@@ -30,7 +32,8 @@
     "date": "2026-03-30",
     "category": "BASTIDORES / CT",
     "source_name": "NetVasco",
-    "source_url": "https://www.netvasco.com.br"
+    "source_url": "https://www.netvasco.com.br",
+    "image": "/noticias/teste_de_fogo.jpg"
   },
   {
     "id": "vistoria-parque-aquatico-patrimonio-2026",
@@ -41,7 +44,8 @@
     "date": "2026-03-30",
     "category": "INFRAESTRUTURA",
     "source_name": "GDC Editorial",
-    "source_url": "https://www.vasco.com.br"
+    "source_url": "https://www.vasco.com.br",
+    "image": "/noticias/patrimonio.jpg"
   },
   {
     "id": "denuncia-pedrinho-stjd-confirmada-2026",
@@ -52,62 +56,8 @@
     "date": "2026-03-30",
     "category": "NOTÍCIAS / JUDICIAL",
     "source_name": "Globo Esporte",
-    "source_url": "https://ge.globo.com/vasco"
-  },
-  {
-    "id": "renato-estuda-substituto-gomez-2026",
-    "title": "🚨 MISTÉRIO NA FRENTE: Renato Estuda Substituto de Gómez para o Duelo de 1º de Abril!",
-    "excerpt": "Com Andrés Gómez fora por suspensão, o comandante vascaíno testa opções no CT Moacyr Barbosa para encarar o Coritiba pela 9ª rodada do Brasileirão.",
-    "full_content": "O técnico Renato Gaúcho quebrou o silêncio após o treino matinal desta segunda-feira no CT Moacyr Barbosa. Com a suspensão de Andrés Gómez, o treinador testou três formações táticas diferentes para o ataque. 'Estamos em um momento decisivo e precisamos de todos os marinheiros a postos', afirmou o comandante. As opções incluem a entrada de um atacante veloz pelos lados ou uma mudança no esquema para reforçar o meio-campo.",
-    "image_url": "/noticias/20260330_renato.png",
-    "date": "2026-03-30",
-    "category": "TÁTICA / VASCO",
-    "source_name": "SuperVasco",
-    "source_url": "https://www.supervasco.com"
-  },
-  {
-    "id": "futsal-viagem-copa-brasil-2026",
-    "title": "🚢 GIGANTES NO PARANÁ: Futsal do Vasco Embarca em Busca da Classificação na Copa do Brasil!",
-    "excerpt": "A delegação cruzmaltina viajou hoje para Uberlândia (MG) para o confronto decisivo contra a equipe local. O Gigante da Colina busca o título inédito.",
-    "full_content": "A delegação do Vasco Futsal decolou hoje para Uberlândia com o moral elevado. Após uma campanha sólida na fase de grupos, o time cruzmaltino inicia o mata-mata da Copa do Brasil fora de casa. 'Respeitamos o adversário, mas o Vasco joga em qualquer lugar buscando a vitória', declarou o capitão da equipe antes do embarque. A torcida local promete fazer uma recepção calorosa no aeroporto.",
-    "image_url": "/noticias/20260330_futsal.png",
-    "date": "2026-03-30",
-    "category": "FUTSAL / VASCO",
-    "source_name": "Vasco Notícias",
-    "source_url": "https://www.vasconoticias.com.br"
-  },
-  {
-    "id": "socio-gigante-resgate-botafogo-2026",
-    "title": "⚔️ CLÁSSICO À VISTA: Resgate do 'Sócio Gigante' para o Duelo contra o Botafogo Abre Hoje!",
-    "excerpt": "A partir das 19h de hoje, os sócios-torcedores poderão resgatar experiências exclusivas para o clássico de domingo. Preparem o coração!",
-    "full_content": "Atenção vascaínos! O programa Sócio Gigante abre hoje às 19h o resgate de experiências para o clássico de domingo em São Januário. Estão disponíveis visitas ao gramado, encontros com ídolos e o tour pelo novo vestiário inaugurado recentemente. Garanta sua participação através do portal oficial e viva de perto o caldeirão pulsando.",
-    "image_url": "/noticias/20260330_socio.png",
-    "date": "2026-03-30",
-    "category": "SOCIAL / VASCO",
-    "source_name": "Site Oficial Vasco",
-    "source_url": "https://www.vasco.com.br"
-  },
-  {
-    "id": "denuncia-pedrinho-stjd-2026",
-    "title": "⚖️ JUSTIÇA NA COLINA: Repercussão da Denúncia de Pedrinho no STJD Ganha Força!",
-    "excerpt": "O presidente Pedrinho não recua após episódios polêmicos contra o Cruzeiro. O clube protocolou denúncia oficial e aguarda posicionamento da federação.",
-    "full_content": "A denúncia protocolada pelo presidente Pedrinho no STJD após o polêmico jogo contra o Cruzeiro ganhou novos capítulos hoje. O jurídico do clube reuniu imagens adicionais de ângulos inéditos que mostram falhas graves na arbitragem de vídeo. O Vasco exige que os responsáveis sejam afastados preventivamente para auditoria. 'Não permitiremos que o suor dos nossos atletas seja desperdiçado por erros evitáveis', afirmou a diretoria em nota.",
-    "image_url": "/noticias/20260330_justica.png",
-    "date": "2026-03-30",
-    "category": "BASTIDORES",
-    "source_name": "Globo Esporte",
-    "source_url": "https://ge.globo.com/vasco"
-  },
-  {
-    "id": "ct-vestiario-elite-entrega-2026",
-    "title": "🆕 CT MOACYR BARBOSA: Vestiário de Elite é Entregue com Tecnologia de Recuperação!",
-    "excerpt": "Novas instalações contam com câmaras criogênicas e sistema de spa para otimizar o rendimento físico do elenco profissional de 2026.",
-    "full_content": "Foi concluída hoje a última fase de modernização do centro de treinamentos: a entrega do Vestiário de Elite. O espaço foi inspirado nos maiores centros esportivos do mundo, contando com zonas de recuperação rápida, piscinas de gelo automatizadas e um ambiente de integração que reforça a união do grupo. Os atletas elogiaram a rapidez na entrega e a qualidade dos equipamentos.",
-    "image_url": "/noticias/20260330_vestiario.png",
-    "date": "2026-03-30",
-    "category": "INFRAESTRUTURA",
-    "source_name": "GDC Editorial",
-    "source_url": "https://www.netvasco.com.br"
+    "source_url": "https://ge.globo.com/vasco",
+    "image": "/noticias/stjd_denuncia.jpg"
   },
   {
     "id": "reforma-sao-januario-2026-prazos",
