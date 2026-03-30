@@ -121,6 +121,7 @@ GDC-ARENA/
 - [x] Content Broadcasting (Share System for News/Cronicas/Events).
 - [x] Mobile Polish (Clean Cartola UI, Instagram Footer, No Click Artifacts).
 - [ ] Implement Tenant Discovery/Creation logic (for new users).
+- [x] Editorial Cycle (Successful News Update with User Images - 30/03/2026).
 
 ## 💰 Financial Orchestration Rules (Layer 2)
 1. **Host Control**: Only the event creator can toggle payment status (is_paid).
